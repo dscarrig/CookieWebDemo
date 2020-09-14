@@ -1,0 +1,36 @@
+<h1>
+  WELCOME!!!
+</h1>
+
+<div class="container">
+  <div style="text-align:center">
+    <h1>
+      Hey {{name}}! Welcome to {{title}}!
+    </h1>
+  </div>
+
+
+  <div>♨♨(⋆‿⋆)♨♨ Infinite pancakes await you!! ♨♨(⋆‿⋆)♨♨</div>
+  <br />
+  <div>
+    ♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨
+    ♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨
+    ♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨
+    ♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨
+    ♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨
+    ♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨♨
+  </div>
+  <br />
+  You can mange your pancakes (todos) <a routerLink="/todos">here</a>
+</div>
+
+<div class="container">
+  Click here to get a customized pancake message
+  <button (click)="getWelcomeMessageWithParameter()" class="btn btn-success">Get Welcome Message</button>
+</div>
+
+<div class="container" *ngIf="welcomeMessageFromService">
+  <h2>Your Customized Welcome Message</h2>
+  {{welcomeMessageFromService}}
+</div>
+
