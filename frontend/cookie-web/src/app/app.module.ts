@@ -17,6 +17,7 @@ import { TodoComponent } from './todo/todo.component';
 import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter-basic-auth.service';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { SuccessComponent } from './success/success.component';
+import { ItemMenuComponent } from './item-menu/item-menu.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SuccessComponent } from './success/success.component';
     LogoutComponent,
     TodoComponent,
     CreateaccountComponent,
-    SuccessComponent
+    SuccessComponent,
+    ItemMenuComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component'
 import { WelcomeDataService } from '../service/data/welcome-data.service';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
 @Component({
   selector: 'app-welcome',
@@ -18,13 +19,15 @@ export class WelcomeComponent implements OnInit {
   //ActivatedRoute
   constructor(
     private route: ActivatedRoute,
-    private service: WelcomeDataService) {
+    private service: WelcomeDataService,
+    public basicAuthenticationService: BasicAuthenticationService
+  ) {
 
   }
 
   ngOnInit(): void {
     console.log(this.message);
-    this.name = this.route.snapshot.params['name'];
+    this.name = this.basicAuthenticationService.getAuthenticatedUser();
   }
 
   getWelcomeMessage() {
