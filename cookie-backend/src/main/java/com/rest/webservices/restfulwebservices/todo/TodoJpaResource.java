@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.rest.webservices.restfulwebservices.todo.Todo;
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TodoJpaResource
