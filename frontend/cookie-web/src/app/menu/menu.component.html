@@ -1,8 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div>
-      <a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/welcome" class="navbar-brand">Pancake Land</a>
-      <a *ngIf="!basicAuthenticationService.isUserLoggedIn()" routerLink="/login" class="navbar-brand">Pancake Land</a>
+      <a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/welcome" class="navbar-brand">Cookie Land</a>
+      <a *ngIf="!basicAuthenticationService.isUserLoggedIn()" routerLink="/login" class="navbar-brand">Cookie Land</a>
     </div>
 
     <ul class="navbar-nav">
@@ -12,6 +12,7 @@
     </ul>
 
     <ul class="navbar-nav navbar-collapse justify-content-end">
+      <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/cart" class="nav-link">({{itemsInCart}})Cart</a></li>
       <li><a *ngIf="!basicAuthenticationService.isUserLoggedIn()" routerLink="/createaccount" class="nav-link">Create Account</a></li>
       <li><a *ngIf="!basicAuthenticationService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
       <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/logout" class="nav-link">Logout</a></li>

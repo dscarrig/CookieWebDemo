@@ -1,0 +1,43 @@
+<body>
+
+
+  <div class="container">
+    <table class="table">
+
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let shopItem of shopItems">
+          <td>{{shopItem.itemName}}</td>
+          <td>{{shopItem.description}}</td>
+          <td>{{shopItem.price}}</td>
+          <td><button (click)="removeItemFromCart(shopItem)" class="btn-success">Remove from cart</button></td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="container">
+    <table class="table">
+
+      <tbody>
+        <td>Total price:</td>
+        <td>${{getCartTotal().toFixed(2)}}</td>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="container">
+    <button (click)="payNow()" class="btn-success">PAY NOW</button>
+  </div>
+
+
+</body>

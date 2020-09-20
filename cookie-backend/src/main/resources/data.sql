@@ -29,4 +29,4 @@ insert into item_node(id, item_name, description, price, picture)
 values(30004, 'Spice', 'Hot and spicy', 5.55, '');
 
 insert into item_node(id, item_name, description, price, picture)
-values(30005, 'Everything Nice', 'Has a secret special ingredient', 4.20, '');
+values(30005, 'Everything Nice', 'Full of secret special ingredients', 4.19, '');

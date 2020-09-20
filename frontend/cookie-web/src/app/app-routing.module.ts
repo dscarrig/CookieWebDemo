@@ -10,6 +10,7 @@ import { TodoComponent } from './todo/todo.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { SuccessComponent } from './success/success.component';
 import { ItemMenuComponent } from './item-menu/item-menu.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 
 // welcome route
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'todos', component: ListtodoComponent, canActivate: [RouteGuardService] },
   { path: 'todos/:id', component: TodoComponent, canActivate: [RouteGuardService] },
   { path: 'menu', component: ItemMenuComponent, canActivate: [RouteGuardService] },
+  { path: 'cart', component: UserCartComponent, canActivate: [RouteGuardService] },
 
   { path: '**', component: ErrorComponent }
 ];

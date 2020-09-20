@@ -11,7 +11,7 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
 })
 export class WelcomeComponent implements OnInit {
 
-  title = 'Breakfast Land'
+  title = 'Cookie Land'
   message = 'Heya doo-doo head. '
   name = ''
   welcomeMessageFromService: string

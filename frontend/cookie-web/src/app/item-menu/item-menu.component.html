@@ -1,1 +1,40 @@
-<p>item-menu works!</p>
+<h1>Our Cookie Menu</h1>
+
+<head>
+  <style>
+    div {
+      background-color: lightgrey;
+      width: 500px;
+      border: 15px solid brown;
+      padding: 20px;
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <tr *ngFor="let shopItem of shopItems">
+    <div class="container">
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <td>{{shopItem.itemName}}</td>
+          <td>{{shopItem.description}}</td>
+          <td>{{shopItem.price}}</td>
+          <td><button (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
+        </tbody>
+
+      </table>
+    </div>
+  </tr>
+
+</body>

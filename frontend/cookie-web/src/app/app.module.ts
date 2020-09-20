@@ -18,6 +18,8 @@ import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { SuccessComponent } from './success/success.component';
 import { ItemMenuComponent } from './item-menu/item-menu.component';
+import { ShopItemComponent } from './shop-item/shop-item.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ItemMenuComponent } from './item-menu/item-menu.component';
     TodoComponent,
     CreateaccountComponent,
     SuccessComponent,
-    ItemMenuComponent
+    ItemMenuComponent,
+    ShopItemComponent,
+    UserCartComponent
   ],
   imports: [
     BrowserModule,

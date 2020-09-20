@@ -3,12 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\createaccount",
+    "\\src\\app\\listtodo",
+    "\\src\\app\\logout",
     "\\src\\app\\menu",
     "\\src\\app\\service",
     "\\src\\app\\service\\data",
     "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\service\\data\\create-user.service.ts",
+  "SelectedNode": "\\src\\app\\logout\\logout.component.html",
   "PreviewInSolutionExplorer": false
 }

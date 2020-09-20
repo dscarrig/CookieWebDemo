@@ -30,5 +30,6 @@ export class TodoDataService {
 
   createTodo(username, todo) {
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/todos/`, todo);
+  
   }
 }

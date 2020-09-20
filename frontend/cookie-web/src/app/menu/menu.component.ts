@@ -7,9 +7,15 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  itemsInCart: number
 
   constructor(public basicAuthenticationService : BasicAuthenticationService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  refreshMenu(num) {
+    this.itemsInCart = num
+  }
+
 
 }
