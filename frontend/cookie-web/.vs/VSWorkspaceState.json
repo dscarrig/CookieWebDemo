@@ -1,15 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\e2e",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\listtodo",
-    "\\src\\app\\logout",
-    "\\src\\app\\menu",
-    "\\src\\app\\service",
-    "\\src\\app\\service\\data",
     "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\logout\\logout.component.html",
+  "SelectedNode": "\\e2e",
   "PreviewInSolutionExplorer": false
 }

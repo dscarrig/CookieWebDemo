@@ -2,8 +2,6 @@ package com.rest.webservices.restfulwebservices.node;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.rest.webservices.restfulwebservices.todo.Todo;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -41,11 +37,14 @@ public class CartItemResource {
 		List<ItemNode> result = new ArrayList<ItemNode>();
 		List<Long> itemIds = cartItemUtils.getUsersItems(username);
 		
-		for(int i = 0; i < itemIds.size(); i++)
+		if(itemIds != null)
 		{
-			result.add(itemNodeJpaRepository.findById(itemIds.get(i)).get());
+			for(int i = 0; i < itemIds.size(); i++)
+			{
+				result.add(itemNodeJpaRepository.findById(itemIds.get(i)).get());
+			}
 		}
-	
+		
 		return result;
 	}
 	

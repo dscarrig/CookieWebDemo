@@ -3,7 +3,6 @@ package com.rest.webservices.restfulwebservices.node;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 public class ItemNode
@@ -23,7 +22,6 @@ public class ItemNode
 	}
 
 	
-
 	public ItemNode(Long id, String itemName, String description, double price, String picture)
 	{
 		super();
