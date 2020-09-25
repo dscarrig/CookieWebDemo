@@ -25,27 +25,27 @@ export class CreateUserService {
 
         this.http.get < Boolean >(`${API_URL}/users/exists/${username}`).subscribe(
           data => {
-            this.userExists = data
+            this.userExists = data;
           }
         )
 
         this.http.post(`${API_URL}/users/new/${username}`, password).subscribe(
           data => {
-            console.log(data)
-            this.basicAuthenticationService.logout()
+            console.log(data);
+            this.basicAuthenticationService.logout();
 
             if (!this.userExists)
-              this.router.navigate(['success'])
+              this.router.navigate(['success']);
             else
-              this.router.navigate(['createaccount', 'fail'])
+              this.router.navigate(['createaccount', 'fail']);
           },
           error => {
-            console.log(error)
+            console.log(error);
           }
         )
         },
         error => {
-          console.log(error)
+          console.log(error);
         }
     )
   }

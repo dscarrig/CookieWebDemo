@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  errorMessage = 'A grave error occured'
+  errorMessage = 'A grave error occured';
 
   constructor() { }
 

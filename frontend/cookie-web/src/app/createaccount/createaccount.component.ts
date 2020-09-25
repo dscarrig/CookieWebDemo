@@ -10,11 +10,11 @@ import { CreateUserService } from '../service/data/create-user.service';
 })
 export class CreateaccountComponent implements OnInit {
 
-  username = ''
-  password = ''
-  fail = ''
-  invalidLogin = false
-  userExists = false
+  username = '';
+  password = '';
+  fail = '';
+  invalidLogin = false;
+  userExists = false;
 
   constructor(
     private router: Router,
@@ -28,9 +28,9 @@ export class CreateaccountComponent implements OnInit {
   }
 
   createUser() {
-    console.log('Trying to create a user')
+    console.log('Trying to create a user');
 
-    this.createUserService.createUser(this.username, this.password)
+    this.createUserService.createUser(this.username, this.password);
   }
 
 }

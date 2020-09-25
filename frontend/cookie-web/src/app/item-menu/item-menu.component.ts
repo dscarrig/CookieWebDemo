@@ -34,8 +34,20 @@ export class ItemMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.username = this.authenticationService.getAuthenticatedUser()
-    this.refreshItems()
+    console.log('Going to menu!');
+
+    if (this.authenticationService.isUserLoggedIn()) {
+      this.username = this.authenticationService.getAuthenticatedUser();
+      this.refreshItems();
+    }
+    else {
+      this.authenticationService.loginAsGuest().subscribe(
+        response => {
+          console.log(response);
+          this.refreshItems();
+        }
+      )
+    }
   }
 
   refreshItems() {
@@ -48,7 +60,7 @@ export class ItemMenuComponent implements OnInit {
   }
 
   addItemToCart(item: ShopItem) {
-    console.log(`Added ${item.itemName} to cart`)
+    console.log(`Added ${item.itemName} to cart`);
 
     this.cartService.addToCart(this.username, item.id).subscribe(
       response => {

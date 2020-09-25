@@ -40,4 +40,8 @@ export class LoginComponent implements OnInit {
       )
   }
 
+  goToCreateAccount() {
+    this.router.navigate(['createaccount'])
+  }
+
 }

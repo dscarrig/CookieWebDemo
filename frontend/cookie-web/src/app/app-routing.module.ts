@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'welcome/:name', component: WelcomeComponent, canActivate: [RouteGuardService] },
   { path: 'todos', component: ListtodoComponent, canActivate: [RouteGuardService] },
   { path: 'todos/:id', component: TodoComponent, canActivate: [RouteGuardService] },
-  { path: 'menu', component: ItemMenuComponent, canActivate: [RouteGuardService] },
+  { path: 'menu', component: ItemMenuComponent },
   { path: 'cart', component: UserCartComponent, canActivate: [RouteGuardService] },
 
   { path: '**', component: ErrorComponent }

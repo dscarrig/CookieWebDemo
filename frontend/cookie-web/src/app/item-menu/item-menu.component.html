@@ -4,8 +4,18 @@
   <style>
     div {
       background-color: lightgrey;
-      width: 500px;
+      width: 750px;
       border: 15px solid brown;
+      padding: 20px;
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<head>
+  <style>
+    td {
+      background-color: lightgrey;
       padding: 20px;
       margin: 20px;
     }
@@ -27,10 +37,11 @@
         </thead>
 
         <tbody>
-          <td>{{shopItem.itemName}}</td>
-          <td>{{shopItem.description}}</td>
-          <td>{{shopItem.price}}</td>
-          <td><button (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
+        <td>{{shopItem.itemName}}</td>
+        <td>{{shopItem.description}}</td>
+        <td>{{shopItem.price}}</td>
+        <td class="alert alert-warning" *ngIf="!authenticationService.isUserLoggedIn()">Log in to add items to your cart</td>
+        <td><button *ngIf="authenticationService.isUserLoggedIn()" (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
         </tbody>
 
       </table>

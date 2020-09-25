@@ -8,7 +8,7 @@
     <ul class="navbar-nav">
       <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/welcome" class="nav-link">Home</a></li>
       <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/todos" class="nav-link">Todos</a></li>
-      <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" routerLink="/menu" class="nav-link">Menu</a></li>
+      <li><a routerLink="/menu" class="nav-link">Menu</a></li>
     </ul>
 
     <ul class="navbar-nav navbar-collapse justify-content-end">

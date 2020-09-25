@@ -30,6 +30,26 @@ export class BasicAuthenticationService {
       )
   }
 
+  loginAsGuest() {
+    let username = 'temp';
+    let password = 'temp';
+
+    return this.http.post<any>(
+      `${API_URL}/authenticate`, {
+        username,
+        password
+      }).pipe(
+        map(
+        data => {
+          console.log('Logged in as guest');
+          sessionStorage.setItem(AUTHENTICATED_USER, username);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          return data;
+          }
+        )
+      )
+  }
+
   getAuthenticatedUser() {
     return sessionStorage.getItem(AUTHENTICATED_USER)
   }
