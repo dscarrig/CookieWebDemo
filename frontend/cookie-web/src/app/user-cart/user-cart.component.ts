@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { CartService } from '../service/cart.service';
+import { AppComponent } from '../app.component';
 
 export class ShopItem {
   constructor(
@@ -29,19 +30,20 @@ export class UserCartComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: BasicAuthenticationService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser()
-    this.refreshItems()
+    this.shopItems = [new ShopItem(0,'0','0',0,'0')];
+    this.refreshItems();
   }
 
   refreshItems() {
     this.cartService.retrieveAllFromCart(this.username).subscribe(
       response => {
-        console.log(response);
         this.shopItems = response;
-        //this.menuComponent.refreshMenu(this.shopItems.length)
+        this.appComponent.refreshMenu();
       }
     )
   }
@@ -49,8 +51,7 @@ export class UserCartComponent implements OnInit {
   removeItemFromCart(item: ShopItem) {
     this.cartService.deleteFromCart(this.username, item.id).subscribe(
       response => {
-        console.log(response);
-        this.refreshItems()
+        this.refreshItems();
       }
     )
   }

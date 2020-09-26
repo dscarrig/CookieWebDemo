@@ -56,4 +56,24 @@ public class CartItemResource {
 		return  new ResponseEntity<ItemNode>(HttpStatus.OK);
 	}
 	
+	@GetMapping("/jpa/users/{username}/cart/totalPrice")
+	public double totalPrice(@PathVariable String username)
+	{
+		List<ItemNode> allItems = getAllCartItems(username);
+		double result = 0;
+		
+		for(int i = 0; i < allItems.size(); i++)
+		{
+			result = result + allItems.get(i).getPrice();
+		}
+		
+		return result;
+	}
+	
+	@GetMapping("/jpa/users/{username}/cart/totalItems")
+	public int totalItems(@PathVariable String username)
+	{
+		return cartItemUtils.getUsersItems(username).size();
+	}
+	
 }

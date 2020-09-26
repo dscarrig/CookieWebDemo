@@ -15,14 +15,22 @@ export class CartService {
 
 
   addToCart(username, id) {
-    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/add`, id)
+    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/add`, id);
   }
 
   retrieveAllFromCart(username) {
-    return this.http.get < ShopItem[] >(`${TODO_JPA_API_URL}/users/${username}/cart`)
+    return this.http.get<ShopItem[]>(`${TODO_JPA_API_URL}/users/${username}/cart`);
   }
 
   deleteFromCart(username, id) {
-    return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/cart/delete/${id}`)
+    return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/cart/delete/${id}`);
+  }
+
+  totalPriceOfCart(username) {
+    return this.http.get(`${TODO_JPA_API_URL}/users/${username}/cart/totalPrice`);
+  }
+
+  totalItemsInCart(username) {
+    return this.http.get(`${TODO_JPA_API_URL}/users/${username}/cart/totalItems`);
   }
 }

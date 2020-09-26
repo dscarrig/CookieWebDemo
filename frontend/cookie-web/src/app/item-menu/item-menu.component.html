@@ -16,8 +16,9 @@
   <style>
     td {
       background-color: lightgrey;
+      width: 750px;
       padding: 20px;
-      margin: 20px;
+      margin: auto;
     }
   </style>
 </head>
@@ -37,11 +38,11 @@
         </thead>
 
         <tbody>
-        <td>{{shopItem.itemName}}</td>
-        <td>{{shopItem.description}}</td>
-        <td>{{shopItem.price}}</td>
-        <td class="alert alert-warning" *ngIf="!authenticationService.isUserLoggedIn()">Log in to add items to your cart</td>
-        <td><button *ngIf="authenticationService.isUserLoggedIn()" (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
+          <td>{{shopItem.itemName}}</td>
+          <td>{{shopItem.description}}</td>
+          <td>{{shopItem.price}}</td>
+          <td class="alert alert-warning" *ngIf="!authenticationService.isUserLoggedIn()">Log in to add items to your cart</td>
+          <td><button *ngIf="authenticationService.isUserLoggedIn()" (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
         </tbody>
 
       </table>

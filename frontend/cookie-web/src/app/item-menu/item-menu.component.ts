@@ -3,6 +3,7 @@ import { ShopItemService } from '../service/data/item-menu-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { CartService } from '../service/cart.service';
+import { AppComponent } from '../app.component';
 
 export class ShopItem {
   constructor(
@@ -22,15 +23,16 @@ export class ShopItem {
 })
 export class ItemMenuComponent implements OnInit {
 
-  shopItems: ShopItem[]
-  username: string
+  shopItems: ShopItem[];
+  username: string;
 
   constructor(
     private itemMenuServie: ShopItemService,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: BasicAuthenticationService,
-    private cartService: CartService
+    private cartService: CartService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class ItemMenuComponent implements OnInit {
 
     this.cartService.addToCart(this.username, item.id).subscribe(
       response => {
-        
+        this.appComponent.refreshMenu();
       }
     )
     

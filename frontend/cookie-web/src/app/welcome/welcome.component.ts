@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppComponent } from '../app.component'
+import { AppComponent } from '../app.component';
 import { WelcomeDataService } from '../service/data/welcome-data.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
