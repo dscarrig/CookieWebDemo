@@ -51,22 +51,23 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedUser() {
-    return sessionStorage.getItem(AUTHENTICATED_USER)
+    return sessionStorage.getItem(AUTHENTICATED_USER);
   }
 
   getAuthenticatedToken() {
     if (this.getAuthenticatedUser())
-      return sessionStorage.getItem(TOKEN)
+      return sessionStorage.getItem(TOKEN);
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem(AUTHENTICATED_USER)
-    return !(user === null) && !(user === 'temp')
+    let user = sessionStorage.getItem(AUTHENTICATED_USER);
+    return !(user === null) && !(user === 'temp');
   }
 
   logout() {
-    sessionStorage.removeItem(AUTHENTICATED_USER)
-    sessionStorage.removeItem(TOKEN)
+    sessionStorage.removeItem(AUTHENTICATED_USER);
+    sessionStorage.removeItem(TOKEN);
+    this.loginAsGuest();
   }
 
 }

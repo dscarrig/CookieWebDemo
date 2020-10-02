@@ -36,8 +36,6 @@ export class ItemMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('Going to menu!');
-
     if (this.authenticationService.isUserLoggedIn()) {
       this.username = this.authenticationService.getAuthenticatedUser();
       this.refreshItems();
@@ -55,7 +53,6 @@ export class ItemMenuComponent implements OnInit {
   refreshItems() {
     this.itemMenuServie.retrieveAllItems().subscribe(
       response => {
-        console.log(response);
         this.shopItems = response;
       }
     )

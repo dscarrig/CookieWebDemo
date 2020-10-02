@@ -41,8 +41,7 @@
           <td>{{shopItem.itemName}}</td>
           <td>{{shopItem.description}}</td>
           <td>{{shopItem.price}}</td>
-          <td class="alert alert-warning" *ngIf="!authenticationService.isUserLoggedIn()">Log in to add items to your cart</td>
-          <td><button *ngIf="authenticationService.isUserLoggedIn()" (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
+          <td><button (click)="addItemToCart(shopItem)" class="btn-success">Add to cart</button></td>
         </tbody>
 
       </table>

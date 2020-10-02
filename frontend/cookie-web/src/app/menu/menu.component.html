@@ -12,8 +12,8 @@
     </ul>
 
     <ul class="navbar-nav navbar-collapse justify-content-end">
-      <li><a *ngIf="basicAuthenticationService.isUserLoggedIn() && getItemsInCart()==0" (click)="refreshMenu()" routerLink="/cart" class="nav-link">Cart</a></li>
-      <li><a *ngIf="basicAuthenticationService.isUserLoggedIn() && getItemsInCart()>0" (click)="refreshMenu()" routerLink="/cart" class="nav-link">Cart ({{itemsInCart}})</a></li>
+      <li><a *ngIf="getItemsInCart()==0" (click)="refreshMenu()" routerLink="/cart" class="nav-link">Cart</a></li>
+      <li><a *ngIf="getItemsInCart()>0" (click)="refreshMenu()" routerLink="/cart" class="nav-link">Cart ({{itemsInCart}})</a></li>
       <li><a *ngIf="!basicAuthenticationService.isUserLoggedIn()" (click)="refreshMenu()" routerLink="/createaccount" class="nav-link">Create Account</a></li>
       <li><a *ngIf="!basicAuthenticationService.isUserLoggedIn()" (click)="refreshMenu()" routerLink="/login" class="nav-link">Login</a></li>
       <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" (click)="refreshMenu()" routerLink="/logout" class="nav-link">Logout</a></li>

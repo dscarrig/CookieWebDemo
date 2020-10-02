@@ -4,8 +4,12 @@
     "\\e2e",
     "\\src",
     "\\src\\app",
-    "\\src\\assets"
+    "\\src\\app\\item-menu",
+    "\\src\\app\\service",
+    "\\src\\app\\service\\http",
+    "\\src\\app\\success",
+    "\\src\\app\\user-cart"
   ],
-  "SelectedNode": "\\e2e",
+  "SelectedNode": "\\src\\app\\service\\cart.service.ts",
   "PreviewInSolutionExplorer": false
 }

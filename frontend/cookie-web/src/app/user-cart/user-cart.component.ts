@@ -29,7 +29,7 @@ export class UserCartComponent implements OnInit {
     private cartService: CartService,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: BasicAuthenticationService,
+    public authenticationService: BasicAuthenticationService,
     private appComponent: AppComponent
   ) { }
 
@@ -69,6 +69,10 @@ export class UserCartComponent implements OnInit {
 
   getCartItemsNum() {
     return this.shopItems.length
+  }
+
+  goToLogin() {
+    this.router.navigate(['login']);
   }
 
   payNow() {

@@ -73,7 +73,10 @@ public class CartItemResource {
 	@GetMapping("/jpa/users/{username}/cart/totalItems")
 	public int totalItems(@PathVariable String username)
 	{
-		return cartItemUtils.getUsersItems(username).size();
+		if(cartItemUtils.getUsersItems(username) != null)
+			return cartItemUtils.getUsersItems(username).size();
+		else
+			return 0;
 	}
 	
 }
