@@ -18,12 +18,21 @@ export class CartService {
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/add`, id);
   }
 
+  copyTempCart(username) {
+    console.log('COPY COPY COPY');
+    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/copy-cart`, "temp");
+  }
+
   retrieveAllFromCart(username) {
     return this.http.get<ShopItem[]>(`${TODO_JPA_API_URL}/users/${username}/cart`);
   }
 
   deleteFromCart(username, id) {
     return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/cart/delete/${id}`);
+  }
+
+  deleteAllFromCart(username) {
+    return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/cart/delete-all`);
   }
 
   totalPriceOfCart(username) {

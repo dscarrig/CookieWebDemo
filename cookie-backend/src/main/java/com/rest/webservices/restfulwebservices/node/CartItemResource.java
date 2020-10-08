@@ -31,6 +31,15 @@ public class CartItemResource {
 		return new ResponseEntity<ItemNode>(HttpStatus.OK);
 	}
 	
+	@PostMapping("/jpa/users/{username}/cart/copy-cart")
+	public ResponseEntity<ItemNode> copyItemsToCart(@PathVariable String username, @PathVariable String copyFromUser)
+	{
+		System.out.println("-----------------> Copying from " + copyFromUser + " to " + username);
+		cartItemUtils.copyCart(copyFromUser, username);
+		
+		return new ResponseEntity<ItemNode>(HttpStatus.OK);
+	}
+	
 	@GetMapping("/jpa/users/{username}/cart")
 	public List<ItemNode> getAllCartItems(@PathVariable String username)
 	{
@@ -52,6 +61,14 @@ public class CartItemResource {
 	public ResponseEntity<ItemNode> removeCartItem(@PathVariable String username, @PathVariable Long itemId)
 	{
 		cartItemUtils.removeItem(username, itemId);
+		
+		return  new ResponseEntity<ItemNode>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/jpa/users/{username}/cart/delete-all")
+	public ResponseEntity<ItemNode> removeAllCartItems(@PathVariable String username)
+	{
+		cartItemUtils.clearItems(username);
 		
 		return  new ResponseEntity<ItemNode>(HttpStatus.OK);
 	}

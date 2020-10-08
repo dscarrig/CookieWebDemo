@@ -44,6 +44,7 @@ export class ItemMenuComponent implements OnInit {
       this.authenticationService.loginAsGuest().subscribe(
         response => {
           console.log(response);
+          this.username = this.authenticationService.getAuthenticatedUser();
           this.refreshItems();
         }
       )

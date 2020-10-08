@@ -1,6 +1,7 @@
 import { BasicAuthenticationService } from './../service/basic-authentication.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +10,15 @@ import { Router } from '@angular/router'
 })
 export class LoginComponent implements OnInit {
 
-  username = ''
-  password = ''
-  errorMessage = 'Invalid Creds'
-  invalidLogin = false
+  username = '';
+  password = '';
+  errorMessage = 'Invalid Creds';
+  invalidLogin = false;
 
   constructor(
     private router: Router,
-    private basicAuthenticationService: BasicAuthenticationService
+    private basicAuthenticationService: BasicAuthenticationService,
+    private cartService: CartService,
   ) { }
 
   ngOnInit(): void {
@@ -28,20 +30,30 @@ export class LoginComponent implements OnInit {
     this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
       data => {
-          console.log('logging in!')
-          console.log(data)
-          this.router.navigate(['welcome', this.username])
-          this.invalidLogin = false
+        console.log('logging in!');
+        this.tranferTempCart();
+        this.router.navigate(['welcome', this.username]);
+        this.invalidLogin = false;
         },
         error => {
-          console.log(error)
-          this.invalidLogin = true
+          console.log(error);
+          this.invalidLogin = true;
         }
       )
   }
 
   goToCreateAccount() {
-    this.router.navigate(['createaccount'])
+    this.router.navigate(['createaccount']);
+  }
+
+  tranferTempCart() {
+    this.cartService.copyTempCart(this.username).subscribe(
+      data => { }
+    )
+
+    this.cartService.deleteAllFromCart("temp").subscribe(
+      data => { }
+    )
   }
 
 }

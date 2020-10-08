@@ -40,4 +40,17 @@ public class CartItemUtils {
 	{
 		customerCarts.put(customer, new ArrayList<Long>());
 	}
+	
+	public void copyCart(String customer, String otherCustomer)
+	{
+		ArrayList<Long> itemsToCopy;
+		
+		if(customerCarts.containsKey(customer))
+			itemsToCopy = customerCarts.get(customer);
+		else
+			itemsToCopy = new ArrayList<Long>();
+		
+		for(int i = 0; i < itemsToCopy.size(); i++)
+			addItem(otherCustomer, itemsToCopy.get(i));
+	}
 }

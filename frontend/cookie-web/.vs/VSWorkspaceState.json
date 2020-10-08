@@ -4,12 +4,13 @@
     "\\e2e",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\footer",
     "\\src\\app\\item-menu",
+    "\\src\\app\\login",
+    "\\src\\app\\logout",
     "\\src\\app\\service",
-    "\\src\\app\\service\\http",
-    "\\src\\app\\success",
-    "\\src\\app\\user-cart"
+    "\\src\\app\\service\\http"
   ],
-  "SelectedNode": "\\src\\app\\service\\cart.service.ts",
+  "SelectedNode": "\\src\\app\\login\\login.component.ts",
   "PreviewInSolutionExplorer": false
 }
