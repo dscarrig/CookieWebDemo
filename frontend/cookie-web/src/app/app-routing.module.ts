@@ -11,6 +11,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { SuccessComponent } from './success/success.component';
 import { ItemMenuComponent } from './item-menu/item-menu.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { EnterUserInfoComponent } from './enter-user-info/enter-user-info.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 // welcome route
 const routes: Routes = [
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'todos/:id', component: TodoComponent, canActivate: [RouteGuardService] },
   { path: 'menu', component: ItemMenuComponent },
   { path: 'cart', component: UserCartComponent },
+  { path: 'enter-user-info', component: EnterUserInfoComponent },
+  { path: 'my-account', component: MyAccountComponent },
 
   { path: '**', component: ErrorComponent }
 ];

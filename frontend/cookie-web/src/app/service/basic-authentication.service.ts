@@ -11,7 +11,9 @@ export const AUTHENTICATED_USER = 'authenticaterUser'
 })
 export class BasicAuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   executeJWTAuthenticationService(username, password) {
 

@@ -10,6 +10,7 @@ import { AppComponent } from '../app.component';
 })
 export class MenuComponent implements OnInit {
   itemsInCart: Object;
+  userName: string;
 
   constructor(
     public basicAuthenticationService: BasicAuthenticationService,
@@ -20,6 +21,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.itemsInCart = 0;
     this.refreshMenu();
+    this.userName = this.basicAuthenticationService.getAuthenticatedUser();
   }
 
   getItemsInCart() {
@@ -30,16 +32,15 @@ export class MenuComponent implements OnInit {
   }
 
   refreshMenu() {
-    let username = this.basicAuthenticationService.getAuthenticatedUser();
+    this.userName = this.basicAuthenticationService.getAuthenticatedUser();
 
-    if (this.basicAuthenticationService.isUserLoggedIn()) {
-      this.cartService.totalItemsInCart(username).subscribe(
+    this.cartService.totalItemsInCart(this.userName).subscribe(
         response => {
           this.itemsInCart = response;
           this.appComponent.finishedRefreshing();
         }
-      )
-    }
+    )
+
   }
     
 

@@ -76,7 +76,7 @@ export class UserCartComponent implements OnInit {
   }
 
   payNow() {
-
+    this.router.navigate(['enter-user-info']);
   }
 
 }

@@ -19,7 +19,6 @@ export class CartService {
   }
 
   copyTempCart(username) {
-    console.log('COPY COPY COPY');
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/copy-cart`, "temp");
   }
 

@@ -4,7 +4,7 @@
   <style>
     div {
       background-color: lightgrey;
-      width: 750px;
+      width: 900px;
       border: 15px solid brown;
       padding: 20px;
       margin: 20px;
@@ -31,6 +31,7 @@
 
         <thead>
           <tr>
+            <th>Picture</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -38,6 +39,7 @@
         </thead>
 
         <tbody>
+          <td><img src={{shopItem.picture}} alt={{shopItem.picture}} width="200" height="150"></td>
           <td>{{shopItem.itemName}}</td>
           <td>{{shopItem.description}}</td>
           <td>{{shopItem.price}}</td>

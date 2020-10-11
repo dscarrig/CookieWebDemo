@@ -2,6 +2,7 @@ import { BasicAuthenticationService } from './../service/basic-authentication.se
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../service/cart.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private basicAuthenticationService: BasicAuthenticationService,
     private cartService: CartService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit(): void {
@@ -48,12 +50,14 @@ export class LoginComponent implements OnInit {
 
   tranferTempCart() {
     this.cartService.copyTempCart(this.username).subscribe(
-      data => { }
-    )
-
-    this.cartService.deleteAllFromCart("temp").subscribe(
-      data => { }
+      data => {
+        this.appComponent.refreshMenu();
+        this.cartService.deleteAllFromCart("temp").subscribe(
+          data => { }
+        )
+      }
     )
   }
+
 
 }

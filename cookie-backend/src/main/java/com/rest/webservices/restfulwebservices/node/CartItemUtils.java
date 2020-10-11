@@ -27,6 +27,8 @@ public class CartItemUtils {
 		
 		currentItems.add(itemId);
 		customerCarts.put(customer, currentItems);
+		
+		System.out.println("Added " + itemId + " item to " + customer);
 	}
 	
 	public void removeItem(String customer, Long itemId)
@@ -46,7 +48,10 @@ public class CartItemUtils {
 		ArrayList<Long> itemsToCopy;
 		
 		if(customerCarts.containsKey(customer))
+		{
+			System.out.println("Copying from " + customer + " to " + otherCustomer);
 			itemsToCopy = customerCarts.get(customer);
+		}
 		else
 			itemsToCopy = new ArrayList<Long>();
 		

@@ -1,0 +1,37 @@
+<h1>Please enter your address and payment information.</h1>
+
+<head>
+  <style>
+    input {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+
+<div class="container">
+
+  <div>
+    Address Line 1 : <input type="text" [(ngModel)]="addressOne">
+    <br />
+    Address Line 2 : <input type="text" [(ngModel)]="addressTwo">
+    <br />
+    City : <input type="text" [(ngModel)]="city">
+    <br />
+    State : <input type="text" [(ngModel)]="state">
+    <br />
+    Credit Card Number : <input type="text" digitOnly [(ngModel)]="creditCardNumber">
+    <br />
+    <br />
+
+    <button (click)=proceedToCheckout() class="btn btn-success">Check Out</button>
+    <br />
+    <br />
+    <button (click)=backToCart() class="btn btn-success">Back to Cart</button>
+
+  </div>
+</div>
+
+

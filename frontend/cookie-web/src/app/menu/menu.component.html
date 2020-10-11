@@ -8,6 +8,7 @@
     <ul class="navbar-nav">
       <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" (click)="refreshMenu()" routerLink="/welcome" class="nav-link">Home</a></li>
       <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" (click)="refreshMenu()" routerLink="/todos" class="nav-link">Todos</a></li>
+      <li><a *ngIf="basicAuthenticationService.isUserLoggedIn()" (click)="refreshMenu()" routerLink="/my-account" class="nav-link">{{userName}}'s Account</a></li>
       <li><a (click)="refreshMenu()" routerLink="/menu" class="nav-link">Menu</a></li>
     </ul>
 

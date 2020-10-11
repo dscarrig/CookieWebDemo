@@ -32,9 +32,8 @@ public class CartItemResource {
 	}
 	
 	@PostMapping("/jpa/users/{username}/cart/copy-cart")
-	public ResponseEntity<ItemNode> copyItemsToCart(@PathVariable String username, @PathVariable String copyFromUser)
+	public ResponseEntity<ItemNode> copyItemsToCart(@PathVariable String username, @RequestBody String copyFromUser)
 	{
-		System.out.println("-----------------> Copying from " + copyFromUser + " to " + username);
 		cartItemUtils.copyCart(copyFromUser, username);
 		
 		return new ResponseEntity<ItemNode>(HttpStatus.OK);

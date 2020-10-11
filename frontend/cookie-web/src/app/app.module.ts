@@ -20,6 +20,9 @@ import { SuccessComponent } from './success/success.component';
 import { ItemMenuComponent } from './item-menu/item-menu.component';
 import { ShopItemComponent } from './shop-item/shop-item.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { EnterUserInfoComponent } from './enter-user-info/enter-user-info.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { UserCartComponent } from './user-cart/user-cart.component';
     SuccessComponent,
     ItemMenuComponent,
     ShopItemComponent,
-    UserCartComponent
+    UserCartComponent,
+    EnterUserInfoComponent,
+    CheckoutComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
