@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.rest.webservices.restfulwebservices.jwt.JwtInMemoryUserDetailsService;
 import com.rest.webservices.restfulwebservices.node.ItemNode;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,10 +22,10 @@ public class UserDataResource
 {
 	
 	@Autowired
-	private UserDataUtils userDataUtils;
+	private UserDetailsJpaRepository userDetailsRepository;
 	
 	@Autowired
-	private UserDetailsJpaRepository userDetailsRepository;
+	private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
 	
 	@PostMapping("/jpa/users/{username}/account-details/add")
 	public ResponseEntity<ItemNode> addUserAccountData(@PathVariable String username, @RequestBody String userDetails)
@@ -35,7 +37,9 @@ public class UserDataResource
 		String zipCode = detailArray[3];
 		String cardNum = detailArray[4];
 		
-		UserDetailsNode newNode = new UserDetailsNode(username, address, city, state, zipCode, cardNum);
+		Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
+		
+		UserDetailsNode newNode = new UserDetailsNode(id, username, address, city, state, zipCode, cardNum);
 		
 		userDetailsRepository.save(newNode);
 		
@@ -43,6 +47,51 @@ public class UserDataResource
 				.toUri();
 
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@GetMapping("/jpa/users/{username}/account-details/get-address")
+	public String getAddress(@PathVariable String username)
+	{
+		Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
+		UserDetailsNode thisNode = userDetailsRepository.findById(id).get();
+		
+		return thisNode.getAddress();
+	}
+	
+	@GetMapping("/jpa/users/{username}/account-details/get-city")
+	public String getCity(@PathVariable String username)
+	{
+		Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
+		UserDetailsNode thisNode = userDetailsRepository.findById(id).get();
+		
+		return thisNode.getCity();
+	}
+	
+	@GetMapping("/jpa/users/{username}/account-details/get-state")
+	public String getState(@PathVariable String username)
+	{
+		Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
+		UserDetailsNode thisNode = userDetailsRepository.findById(id).get();
+		
+		return thisNode.getAddress();
+	}
+	
+	@GetMapping("/jpa/users/{username}/account-details/get-zip-code")
+	public String getZipCode(@PathVariable String username)
+	{
+		Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
+		UserDetailsNode thisNode = userDetailsRepository.findById(id).get();
+		
+		return thisNode.getZipCode();
+	}
+	
+	@GetMapping("/jpa/users/{username}/account-details/get-card-number")
+	public String getCardNumber(@PathVariable String username)
+	{
+		Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
+		UserDetailsNode thisNode = userDetailsRepository.findById(id).get();
+		
+		return thisNode.getCardNumber();
 	}
 	
 }

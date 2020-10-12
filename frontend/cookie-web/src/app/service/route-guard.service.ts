@@ -9,7 +9,8 @@ export class RouteGuardService implements CanActivate{
 
   constructor(
     private authenticationService: BasicAuthenticationService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authenticationService.isUserLoggedIn())

@@ -4,11 +4,9 @@
     "\\e2e",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\footer",
-    "\\src\\app\\item-menu",
-    "\\src\\app\\service",
-    "\\src\\app\\service\\http"
+    "\\src\\app\\enter-user-info",
+    "\\src\\app\\service"
   ],
-  "SelectedNode": "\\src\\app\\service\\cart.service.ts",
+  "SelectedNode": "\\src\\app\\enter-user-info\\enter-user-info.component.ts",
   "PreviewInSolutionExplorer": false
 }

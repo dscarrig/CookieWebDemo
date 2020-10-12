@@ -9,8 +9,9 @@ public class UserDetailsNode
 {
 	@Id
 	@GeneratedValue
-	private String username;
+	private Long id;
 	
+	private String username;
 	private String address;
 	private String city;
 	private String state;
@@ -22,7 +23,7 @@ public class UserDetailsNode
 		
 	}
 	
-	public UserDetailsNode(String username, String address, String city, String state, String zipCode,
+	public UserDetailsNode(Long id, String username, String address, String city, String state, String zipCode,
 			String cardNumber)
 	{
 		super();
@@ -82,6 +83,15 @@ public class UserDetailsNode
 	{
 		this.cardNumber = cardNumber;
 	}
+	public Long getId()
+	{
+		return id;
+	}
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+	
 	
 	
 
