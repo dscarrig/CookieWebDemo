@@ -13,6 +13,11 @@ import { ItemMenuComponent } from './item-menu/item-menu.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { EnterUserInfoComponent } from './enter-user-info/enter-user-info.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { ModifyAddressComponent } from './modify-address/modify-address.component';
+import { VerifyAddressComponent } from './verify-address/verify-address.component';
+import { ConfirmCheckoutComponent } from './confirm-checkout/confirm-checkout.component';
+import { OrderCompleteComponent } from './order-complete/order-complete.component';
+import { ModifyCardNumComponent } from './modify-card-num/modify-card-num.component';
 
 // welcome route
 const routes: Routes = [
@@ -28,8 +33,13 @@ const routes: Routes = [
   { path: 'todos/:id', component: TodoComponent, canActivate: [RouteGuardService] },
   { path: 'menu', component: ItemMenuComponent },
   { path: 'cart', component: UserCartComponent },
-  { path: 'enter-user-info', component: EnterUserInfoComponent },
-  { path: 'my-account', component: MyAccountComponent },
+  { path: 'enter-user-info', component: EnterUserInfoComponent, canActivate: [RouteGuardService] },
+  { path: 'my-account', component: MyAccountComponent, canActivate: [RouteGuardService] },
+  { path: 'modify-address', component: ModifyAddressComponent, canActivate: [RouteGuardService] },
+  { path: 'modify-card-num', component: ModifyCardNumComponent, canActivate: [RouteGuardService] },
+  { path: 'verify-address', component: VerifyAddressComponent, canActivate: [RouteGuardService] },
+  { path: 'confirm-checkout', component: ConfirmCheckoutComponent, canActivate: [RouteGuardService] },
+  { path: 'order-complete', component: OrderCompleteComponent, canActivate: [RouteGuardService] },
 
   { path: '**', component: ErrorComponent }
 ];

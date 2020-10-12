@@ -1,7 +1,7 @@
 <body>
 
 
-  <div class="container">
+  <div *ngIf="getCartTotal() > 0" class="container">
     <table class="table">
 
       <thead>
@@ -24,7 +24,7 @@
     </table>
   </div>
 
-  <div class="container">
+  <div *ngIf="getCartTotal() > 0" class="container">
     <table class="table">
 
       <tbody>
@@ -35,8 +35,14 @@
     </table>
   </div>
 
+  <div *ngIf="getCartTotal() == 0" class="container">
+    Cart is empty.
+    <br />
+    <button (click)="goToMenu()" class="btn-success">Go to the menu to add items to the cart.</button>
+  </div>
+
   <div class="container">
-    <button *ngIf="authenticationService.isUserLoggedIn()" (click)="payNow()" class="btn-success">PAY NOW</button>
+    <button *ngIf="authenticationService.isUserLoggedIn() && getCartTotal() > 0" (click)="payNow()" class="btn-success">PAY NOW</button>
     <button *ngIf="!authenticationService.isUserLoggedIn()" (click)="goToLogin()" class="btn-success">Log in to check out</button>
   </div>
 

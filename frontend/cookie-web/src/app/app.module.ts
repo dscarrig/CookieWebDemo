@@ -23,6 +23,11 @@ import { UserCartComponent } from './user-cart/user-cart.component';
 import { EnterUserInfoComponent } from './enter-user-info/enter-user-info.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { ModifyAddressComponent } from './modify-address/modify-address.component';
+import { VerifyAddressComponent } from './verify-address/verify-address.component';
+import { ConfirmCheckoutComponent } from './confirm-checkout/confirm-checkout.component';
+import { OrderCompleteComponent } from './order-complete/order-complete.component';
+import { ModifyCardNumComponent } from './modify-card-num/modify-card-num.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,12 @@ import { MyAccountComponent } from './my-account/my-account.component';
     UserCartComponent,
     EnterUserInfoComponent,
     CheckoutComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    ModifyAddressComponent,
+    VerifyAddressComponent,
+    ConfirmCheckoutComponent,
+    OrderCompleteComponent,
+    ModifyCardNumComponent
   ],
   imports: [
     BrowserModule,

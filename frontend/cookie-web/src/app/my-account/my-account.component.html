@@ -1,1 +1,42 @@
-<p>my-account works!</p>
+<h1>{{accountDetailItem.username}}'s Account</h1>
+
+
+<div *ngIf="hasSavedAddress() == 1">
+  <br />
+  <h3>My saved address:</h3>
+  {{accountDetailItem.fullName}}
+  <br />
+  {{accountDetailItem.address}}
+  <br />
+  {{accountDetailItem.city}} {{accountDetailItem.state}}
+  <br />
+  {{accountDetailItem.zipCode}}
+</div>
+
+<div *ngIf="hasSavedAddress() == 0">
+  <h3>You have no saved address.</h3>
+</div>
+
+<div>
+  <br />
+  <button (click)="modifyAddress()" class="btn-success">Change Saved Address</button>
+  <br />
+</div>
+
+<div *ngIf="hasSavedCardNum() == 1">
+  <br />
+  <h3>My saved card number:</h3>
+  {{accountDetailItem.cardNum}}
+</div>
+
+<div *ngIf="hasSavedCardNum() == 0">
+  <br />
+  <h3>You have no saved card number.</h3>
+</div>
+
+<div>
+  <br />
+  <button (click)="modifyCardNum()" class="btn-success">Change Saved Card Number</button>
+</div>
+
+

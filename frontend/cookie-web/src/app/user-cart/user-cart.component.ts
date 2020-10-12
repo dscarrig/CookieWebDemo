@@ -22,8 +22,8 @@ export class ShopItem {
 })
 export class UserCartComponent implements OnInit {
 
-  shopItems: ShopItem[]
-  username: string
+  shopItems: ShopItem[];
+  username: string;
 
   constructor(
     private cartService: CartService,
@@ -57,26 +57,30 @@ export class UserCartComponent implements OnInit {
   }
 
   getCartTotal() {
-    var total = 0
-    var i
+    let total = 0;
+    var i;
 
     for (i = 0; i < this.shopItems.length; i++) {
-      total = total + this.shopItems[i].price
+      total = total + this.shopItems[i].price;
     }
 
-    return total
+    return total;
   }
 
   getCartItemsNum() {
-    return this.shopItems.length
+    return this.shopItems.length;
   }
 
   goToLogin() {
     this.router.navigate(['login']);
   }
 
+  goToMenu() {
+    this.router.navigate(['menu']);
+  }
+
   payNow() {
-    this.router.navigate(['enter-user-info']);
+    this.router.navigate(['verify-address']);
   }
 
 }

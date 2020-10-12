@@ -12,29 +12,41 @@ public class UserDetailsNode
 	private Long id;
 	
 	private String username;
+	private String fullName;
 	private String address;
 	private String city;
 	private String state;
 	private String zipCode;
-	private String cardNumber;
+	private String cardNum;
 	
 	protected UserDetailsNode() 
 	{
 		
 	}
 	
-	public UserDetailsNode(Long id, String username, String address, String city, String state, String zipCode,
-			String cardNumber)
+	public UserDetailsNode(Long id, String username, String fullName, String address, String city, String state, String zipCode,
+			String cardNum)
 	{
 		super();
+		this.id = id;
 		this.username = username;
+		this.fullName = fullName;
 		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.zipCode = zipCode;
-		this.cardNumber = cardNumber;
+		this.cardNum = cardNum;
+		
 	}
 	
+	public Long getId()
+	{
+		return id;
+	}
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
 	public String getUsername()
 	{
 		return username;
@@ -42,6 +54,14 @@ public class UserDetailsNode
 	public void setUsername(String username)
 	{
 		this.username = username;
+	}
+	public String getFullName()
+	{
+		return fullName;
+	}
+	public void setFullName(String fullName)
+	{
+		this.fullName = fullName;
 	}
 	public String getAddress()
 	{
@@ -75,22 +95,15 @@ public class UserDetailsNode
 	{
 		this.zipCode = zipCode;
 	}
-	public String getCardNumber()
+	public String getCardNum()
 	{
-		return cardNumber;
+		return cardNum;
 	}
-	public void setCardNumber(String cardNumber)
+	public void setCardNum(String cardNum)
 	{
-		this.cardNumber = cardNumber;
+		this.cardNum = cardNum;
 	}
-	public Long getId()
-	{
-		return id;
-	}
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
+	
 	
 	
 	
