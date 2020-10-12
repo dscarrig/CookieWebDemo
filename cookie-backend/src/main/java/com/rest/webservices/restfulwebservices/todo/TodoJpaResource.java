@@ -27,7 +27,6 @@ public class TodoJpaResource
 	@GetMapping("/jpa/users/{username}/todos")
 	public List<Todo> getAllTodos(@PathVariable String username)
 	{
-		System.out.println("Finding todos with username: " + username);
 		return todoJpaRepository.findByUsername(username);
 	}
 
@@ -51,7 +50,6 @@ public class TodoJpaResource
 	@PutMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo)
 	{
-
 		// Todo todoUpdated = todoService.save(todo);
 		Todo todoUpdated = todoJpaRepository.save(todo);
 

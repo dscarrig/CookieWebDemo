@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ItemNodeJpaRepository extends JpaRepository<ItemNode, Long>
 {
-
+	
 }
