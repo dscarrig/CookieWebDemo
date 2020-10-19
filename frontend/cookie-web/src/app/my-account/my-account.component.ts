@@ -25,6 +25,8 @@ export class AccountDetailItem {
 export class MyAccountComponent implements OnInit {
   username: string;
   accountDetailItem: AccountDetailItem;
+  defaultAccountDetailItem: AccountDetailItem;
+  allAccountDetailItems: AccountDetailItem[];
 
   constructor(
     private userInfoService: UserInfoService,
@@ -44,6 +46,14 @@ export class MyAccountComponent implements OnInit {
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
       response => {
         this.accountDetailItem = response;
+        this.defaultAccountDetailItem = this.accountDetailItem;
+      }
+    )
+
+    this.userInfoService.getAllUsersAccountDetails(this.username).subscribe(
+      response => {
+        this.allAccountDetailItems = response;
+        this.allAccountDetailItems.reverse();
       }
     )
   }
@@ -56,21 +66,46 @@ export class MyAccountComponent implements OnInit {
     this.router.navigate(['modify-card-num']);
   }
 
+  deleteAddress(toDelete) {
+   
+    this.userInfoService.deleteUserDetail(this.username, toDelete).subscribe(
+      response => {
+        this.ngOnInit();
+
+      }
+    )
+  }
+
+  setAsDefault(newDefault) {
+    this.userInfoService.setDefaultDetail(this.username, newDefault).subscribe(
+      response => {
+        this.ngOnInit();
+      }
+    )
+  }
+
   hasSavedAddress() {
-    if (this.accountDetailItem.address === ' ' || this.accountDetailItem.address === '') {
-      return 0;
-    }
-    else {
-      return 1;
-    }
-      
+    return this.checkIfValid(this.accountDetailItem.address);
   }
 
   hasSavedCardNum() {
-    if (this.accountDetailItem.cardNum === ' ' || this.accountDetailItem.address === '')
+    return this.checkIfValid(this.accountDetailItem.cardNum);
+  }
+
+
+  checkIfValid(toCheck: string) {
+    if (toCheck === ' ' || toCheck === '' || toCheck === '-1')
       return 0;
     else
       return 1;
   }
 
+  isDefaultAccountDetailItem(compare) {
+    console.log(`Default address is ${this.defaultAccountDetailItem.address}`);
+    console.log(`Compare address is ${compare.address}`);
+    if (compare.address === this.defaultAccountDetailItem.address)
+      return 1;
+    else
+      return 0;
+  }
 }

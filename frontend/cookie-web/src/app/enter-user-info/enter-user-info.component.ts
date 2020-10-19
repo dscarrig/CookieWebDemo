@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoService } from '../service/user-info.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import { AccountDetailItem } from '../my-account/my-account.component';
 
 @Component({
   selector: 'app-enter-user-info',
@@ -9,6 +10,9 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
   styleUrls: ['./enter-user-info.component.css']
 })
 export class EnterUserInfoComponent implements OnInit {
+
+  accountDetailItem: AccountDetailItem;
+  username: string;
 
   fullName = '';
   addressOne = '';
@@ -25,6 +29,14 @@ export class EnterUserInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.username = this.basicAuthenticationService.getAuthenticatedUser();
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '');
+
+    this.userInfoService.getUserAccountDetails(this.username).subscribe(
+      response => {
+        this.accountDetailItem = response;
+      }
+    )
   }
 
   proceedToCheckout() {

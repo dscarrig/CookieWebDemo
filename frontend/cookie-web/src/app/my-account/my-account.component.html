@@ -1,17 +1,35 @@
 <h1>{{accountDetailItem.username}}'s Account</h1>
 
 
-<div *ngIf="hasSavedAddress() == 1">
-  <br />
-  <h3>My saved address:</h3>
-  {{accountDetailItem.fullName}}
-  <br />
-  {{accountDetailItem.address}}
-  <br />
-  {{accountDetailItem.city}} {{accountDetailItem.state}}
-  <br />
-  {{accountDetailItem.zipCode}}
+<div *ngIf="hasSavedAddress() == 1" class="container">
+  <table class="table">
+
+    <tbody>
+      <tr *ngFor="let accountDetailItem of allAccountDetailItems">
+        <td>
+          {{accountDetailItem.fullName}}
+          <br />
+          {{accountDetailItem.address}}
+          <br />
+          {{accountDetailItem.city}} {{accountDetailItem.state}}
+          <br />
+          {{accountDetailItem.zipCode}}
+        </td>
+
+        <td>
+          <div class="alert alert-warning" *ngIf="isDefaultAccountDetailItem(accountDetailItem) == 1">Default Address</div>
+          <button *ngIf="isDefaultAccountDetailItem(accountDetailItem) == 0" (click)="setAsDefault(accountDetailItem)" class="btn-success">Set As Default</button>
+          <br />
+          <br />
+          <button (click)="deleteAddress(accountDetailItem)" class="btn-success">Delete Address</button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
 </div>
+
 
 <div *ngIf="hasSavedAddress() == 0">
   <h3>You have no saved address.</h3>
@@ -19,19 +37,19 @@
 
 <div>
   <br />
-  <button (click)="modifyAddress()" class="btn-success">Change Saved Address</button>
+  <button (click)="modifyAddress()" class="btn-success">Add New Address</button>
   <br />
 </div>
 
 <div *ngIf="hasSavedCardNum() == 1">
   <br />
-  <h3>My saved card number:</h3>
+  <h3>Saved card number for {{accountDetailItem.fullName}}:</h3>
   {{accountDetailItem.cardNum}}
 </div>
 
 <div *ngIf="hasSavedCardNum() == 0">
   <br />
-  <h3>You have no saved card number.</h3>
+  <h3>No saved card number for {{accountDetailItem.fullName}}.</h3>
 </div>
 
 <div>

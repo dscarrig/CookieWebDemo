@@ -35,7 +35,12 @@ export class ModifyCardNumComponent implements OnInit {
 
   saveNewCardNum() {
     let username = this.basicAuthenticationService.getAuthenticatedUser();
-    let combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_' + this.cardNum;
+    var combinedInfo
+
+    if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '')
+      combinedInfo = ' _ _ _ _ _' + this.cardNum;
+    else
+      combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_' + this.cardNum;
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
       response => {

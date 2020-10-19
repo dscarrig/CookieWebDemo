@@ -13,11 +13,16 @@ export class UserInfoService {
   ) { }
 
   addUserInfo(username, userInfo) {
+    console.log(`Adding info: ${userInfo}`)
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/add`, userInfo);
   }
 
   getUserAccountDetails(username) {
     return this.http.get<AccountDetailItem>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-account-details`);
+  }
+
+  getAllUsersAccountDetails(username) {
+    return this.http.get<AccountDetailItem[]>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-all-users-account-details`);
   }
 
   getUserAddress(username) {
@@ -38,5 +43,13 @@ export class UserInfoService {
 
   getUserCardNumber(username) {
     return this.http.get<string>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-card-number`);
+  }
+
+  deleteUserDetail(username, toDelete) {
+    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/delete-account-detail`, toDelete);
+  }
+
+  setDefaultDetail(username, newDefault) {
+    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/set-new-default`, newDefault);
   }
 }

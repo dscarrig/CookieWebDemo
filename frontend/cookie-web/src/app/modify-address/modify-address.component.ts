@@ -39,7 +39,12 @@ export class ModifyAddressComponent implements OnInit {
 
   saveNewAddress() {
     let username = this.basicAuthenticationService.getAuthenticatedUser();
-    let combinedInfo = this.fullName + '_' + this.addressOne + ' ' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_' + this.accountDetailItem.cardNum;
+    var combinedInfo;
+
+    if (this.accountDetailItem.cardNum === '' || this.accountDetailItem.cardNum === '-1')
+      combinedInfo = this.fullName + '_' + this.addressOne + ' ' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_-1';
+    else
+      combinedInfo = this.fullName + '_' + this.addressOne + ' ' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_' + this.accountDetailItem.cardNum;
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
       response => {
