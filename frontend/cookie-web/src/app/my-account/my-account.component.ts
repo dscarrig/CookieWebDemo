@@ -9,6 +9,7 @@ export class AccountDetailItem {
     public username: string,
     public fullName: string,
     public address: string,
+    public addressTwo: string,
     public city: string,
     public state: string,
     public zipCode: string,
@@ -35,7 +36,7 @@ export class MyAccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
     this.refreshAccountInfo();
   }
 
@@ -71,9 +72,27 @@ export class MyAccountComponent implements OnInit {
     this.userInfoService.deleteUserDetail(this.username, toDelete).subscribe(
       response => {
         this.ngOnInit();
-
       }
     )
+
+  }
+
+  deleteCardNum(toDelete) {
+
+    var combinedInfo
+
+    if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '')
+      combinedInfo = ' _ _ _ _ _ _-1';
+    else
+      combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.addressTwo + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_-1';
+
+    this.userInfoService.addUserInfo(this.username, combinedInfo).subscribe(
+      response => {
+        console.log(response);
+        this.ngOnInit();
+      }
+    )
+
   }
 
   setAsDefault(newDefault) {
@@ -92,6 +111,9 @@ export class MyAccountComponent implements OnInit {
     return this.checkIfValid(this.accountDetailItem.cardNum);
   }
 
+  hasAddressLineTwo() {
+    return (this.accountDetailItem.addressTwo != '' && this.accountDetailItem.addressTwo != ' ');
+  }
 
   checkIfValid(toCheck: string) {
     if (toCheck === ' ' || toCheck === '' || toCheck === '-1')

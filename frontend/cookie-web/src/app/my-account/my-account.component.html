@@ -11,6 +11,8 @@
           <br />
           {{accountDetailItem.address}}
           <br />
+          {{accountDetailItem.addressTwo}}
+          <br *ngIf="hasAddressLineTwo()"/>
           {{accountDetailItem.city}} {{accountDetailItem.state}}
           <br />
           {{accountDetailItem.zipCode}}
@@ -45,11 +47,17 @@
   <br />
   <h3>Saved card number for {{accountDetailItem.fullName}}:</h3>
   {{accountDetailItem.cardNum}}
+  <button (click)="deleteCardNum(accountDetailItem)" class="btn-success">Delete Payment Info</button>
 </div>
 
-<div *ngIf="hasSavedCardNum() == 0">
+<div *ngIf="hasSavedCardNum() == 0 && hasSavedAddress() == 1">
   <br />
   <h3>No saved card number for {{accountDetailItem.fullName}}.</h3>
+</div>
+
+<div *ngIf="hasSavedCardNum() == 0 && hasSavedAddress() == 0">
+  <br />
+  <h3>No saved card number.</h3>
 </div>
 
 <div>

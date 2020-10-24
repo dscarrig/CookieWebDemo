@@ -28,8 +28,8 @@
     <br />
     <br />
 
-    <button *ngIf="allInputEntered()" (click)=saveNewAddress() class="btn btn-success">Save New Address</button>
-    <div class="alert alert-warning" *ngIf="!allInputEntered()">Please fill out address.</div>
+    <button *ngIf="allInputEntered() && allCorrectFormat()" (click)=saveNewAddress() class="btn btn-success">Save New Address</button>
+    <div class="alert alert-warning" *ngIf="!allInputEntered() || !allCorrectFormat()">Please fill out address.</div>
     <br />
     <br />
     <button (click)=backToUserInfo() class="btn btn-success">Cancel</button>

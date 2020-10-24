@@ -34,25 +34,25 @@ public class UserDataResource
 		String[] detailArray = userDetails.split("_");
 		List<UserDetailsNode> nodeList;
 
-
-		if (detailArray.length == 6)
+		if (detailArray.length == 7)
 		{
 			String fullName = detailArray[0];
 			String address = detailArray[1];
-			String city = detailArray[2];
-			String state = detailArray[3];
-			String zipCode = detailArray[4];
-			String cardNum = detailArray[5];
+			String addressTwo = detailArray[2];
+			String city = detailArray[3];
+			String state = detailArray[4];
+			String zipCode = detailArray[5];
+			String cardNum = detailArray[6];
 
 			Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
 
-			newNode = new UserDetailsNode(id, username, fullName, address, city, state, zipCode, cardNum);
-			
+			newNode = new UserDetailsNode(id, username, fullName, address, addressTwo, city, state, zipCode, cardNum);
+
 			nodeList = userDetailsRepository.findByUsername(username);
-			
-			for(int i = 0; i < nodeList.size(); i++)
+
+			for (int i = 0; i < nodeList.size(); i++)
 			{
-				if(nodeList.get(i).getAddress().contentEquals(address))
+				if (nodeList.get(i).getAddress().contentEquals(address))
 				{
 					userDetailsRepository.delete(nodeList.get(i));
 					break;
@@ -62,12 +62,9 @@ public class UserDataResource
 			userDetailsRepository.save(newNode);
 		} else
 		{
-			System.out.println("----> Wrong sized array");
-			newNode = new UserDetailsNode(0L, username, "", "", "", "", "", "");
+			System.out.println("----> Wrong sized array: " + userDetails);
+			newNode = new UserDetailsNode(0L, username, "", "", "", "", "", "", "");
 		}
-		
-		
-		
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newNode.getUsername())
 				.toUri();
@@ -84,7 +81,7 @@ public class UserDataResource
 
 		if (nodeList.isEmpty())
 		{
-			thisNode = new UserDetailsNode(0L, username, "", "", "", "", "", "");
+			thisNode = new UserDetailsNode(0L, username, "", "", "", "", "", "", "");
 		} else
 		{
 			thisNode = nodeList.get(nodeList.size() - 1);
@@ -103,37 +100,38 @@ public class UserDataResource
 	}
 
 	@PostMapping("/jpa/users/{username}/account-details/delete-account-detail")
-	public ResponseEntity<Void> deleteAccountDetail(@PathVariable String username, @RequestBody UserDetailsNode toDelete)
+	public ResponseEntity<Void> deleteAccountDetail(@PathVariable String username,
+			@RequestBody UserDetailsNode toDelete)
 	{
 		List<UserDetailsNode> nodeList = userDetailsRepository.findByUsername(username);
-		
-		for(int i = 0; i < nodeList.size(); i++)
+
+		for (int i = 0; i < nodeList.size(); i++)
 		{
-			if(nodeList.get(i).getAddress().contentEquals(toDelete.getAddress()))
+			if (nodeList.get(i).getAddress().contentEquals(toDelete.getAddress()))
 			{
 				userDetailsRepository.delete(nodeList.get(i));
 				break;
 			}
 		}
-		
+
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@PostMapping("/jpa/users/{username}/account-details/set-new-default")
 	public ResponseEntity<Void> setNewDefault(@PathVariable String username, @RequestBody UserDetailsNode newDefault)
 	{
 		List<UserDetailsNode> nodeList = userDetailsRepository.findByUsername(username);
-		
-		for(int i = 0; i < nodeList.size(); i++)
+
+		for (int i = 0; i < nodeList.size(); i++)
 		{
-			if(nodeList.get(i).getAddress().contentEquals(newDefault.getAddress()))
+			if (nodeList.get(i).getAddress().contentEquals(newDefault.getAddress()))
 			{
 				userDetailsRepository.delete(nodeList.get(i));
 				userDetailsRepository.save(newDefault);
 				break;
 			}
 		}
-		
+
 		return ResponseEntity.noContent().build();
 	}
 

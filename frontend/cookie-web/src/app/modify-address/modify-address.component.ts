@@ -26,7 +26,7 @@ export class ModifyAddressComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
 
     this.username = this.basicAuthenticationService.getAuthenticatedUser();
 
@@ -42,9 +42,9 @@ export class ModifyAddressComponent implements OnInit {
     var combinedInfo;
 
     if (this.accountDetailItem.cardNum === '' || this.accountDetailItem.cardNum === '-1')
-      combinedInfo = this.fullName + '_' + this.addressOne + ' ' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_-1';
+      combinedInfo = this.fullName + '_' + this.addressOne + '_' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_-1';
     else
-      combinedInfo = this.fullName + '_' + this.addressOne + ' ' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_' + this.accountDetailItem.cardNum;
+      combinedInfo = this.fullName + '_' + this.addressOne + '_' + this.addressTwo + '_' + this.city + '_' + this.state + '_' + this.zipCode + '_' + this.accountDetailItem.cardNum;
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
       response => {
@@ -60,6 +60,35 @@ export class ModifyAddressComponent implements OnInit {
       return false;
     else
       return true;
+  }
+
+  allCorrectFormat() {
+    return this.zipCorrectFormat() && this.stateCorrectFormat();
+  }
+
+  stateCorrectFormat() {
+    let correct = true;
+
+    if (this.state.length != 2)
+      correct = false;
+
+    if (this.state.match(/\d+/g) != null) {
+      correct = false;
+    }
+
+    return correct;
+  }
+
+  zipCorrectFormat() {
+    let correct = true;
+
+    if (this.zipCode.length != 5)
+      correct = false;
+
+    if (this.zipCode.match(/^[0-9]+$/) == null)
+      correct = false;
+
+    return correct;
   }
 
   backToUserInfo() {

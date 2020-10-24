@@ -18,7 +18,7 @@
     <br />
     Address Line 1 : <input type="text" value={{accountDetailItem.address}} [(ngModel)]="addressOne">
     <br />
-    Address Line 2 : <input type="text" [(ngModel)]="addressTwo">
+    Address Line 2 : <input type="text" value={{accountDetailItem.addressTwo}} [(ngModel)]="addressTwo">
     <br />
     City : <input type="text" value={{accountDetailItem.city}} [(ngModel)]="city">
     <br />
@@ -30,8 +30,8 @@
     <br />
     <br />
 
-    <button *ngIf="allInputEntered()" (click)=proceedToCheckout() class="btn btn-success">Check Out</button>
-    <div class="alert alert-warning" *ngIf="!allInputEntered()">Please fill out address and payment information.</div>
+    <button *ngIf="allInputEntered() && allCorrectFormat()" (click)=proceedToCheckout() class="btn btn-success">Check Out</button>
+    <div class="alert alert-warning" *ngIf="!allInputEntered() || !allCorrectFormat()">Please fill out address and payment information.</div>
     <br />
     <br />
     <button (click)=backToCart() class="btn btn-success">Back to Cart</button>

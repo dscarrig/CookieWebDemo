@@ -21,7 +21,7 @@ export class VerifyAddressComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser();
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
       response => {

@@ -16,8 +16,8 @@
   <div>
     Card Number : <input type="text" [(ngModel)]="cardNum">
 
-    <button *ngIf="allInputEntered()" (click)=saveNewCardNum() class="btn btn-success">Save New Card Number</button>
-    <div class="alert alert-warning" *ngIf="!allInputEntered()">Please fill out card number.</div>
+    <button *ngIf="allInputEntered() && cardNumCorrectFormat()" (click)=saveNewCardNum() class="btn btn-success">Save New Card Number</button>
+    <div class="alert alert-warning" *ngIf="!allInputEntered() || !cardNumCorrectFormat()">Please fill out card number.</div>
     <br />
     <br />
     <button (click)=backToUserInfo() class="btn btn-success">Cancel</button>

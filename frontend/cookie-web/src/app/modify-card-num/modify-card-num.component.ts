@@ -22,7 +22,7 @@ export class ModifyCardNumComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
 
     this.username = this.basicAuthenticationService.getAuthenticatedUser();
 
@@ -38,9 +38,9 @@ export class ModifyCardNumComponent implements OnInit {
     var combinedInfo
 
     if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '')
-      combinedInfo = ' _ _ _ _ _' + this.cardNum;
+      combinedInfo = ' _ _ _ _ _ _' + this.cardNum;
     else
-      combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_' + this.cardNum;
+      combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.addressTwo + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_' + this.cardNum;
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
       response => {
@@ -55,6 +55,18 @@ export class ModifyCardNumComponent implements OnInit {
       return false;
     else
       return true;
+  }
+
+  cardNumCorrectFormat() {
+    let correct = true;
+
+    if (this.cardNum.length != 16)
+      correct = false;
+
+    if (this.cardNum.match(/^[0-9]+$/) == null)
+      correct = false;
+
+    return correct;
   }
 
   backToUserInfo() {

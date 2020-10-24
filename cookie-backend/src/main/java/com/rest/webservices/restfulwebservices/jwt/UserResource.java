@@ -30,17 +30,17 @@ public class UserResource
 		System.out.println("Finding user with id: " + id);
 		return userDetailsService.loadUserById(id);
 	}
-	
+
 	@GetMapping("/users/exists/{username}")
 	public boolean userExists(@PathVariable String username)
 	{
 		boolean response;
-		
-		if(userDetailsService.userExists(username))
+
+		if (userDetailsService.userExists(username))
 			response = true;
 		else
 			response = false;
-		
+
 		return response;
 	}
 
@@ -53,7 +53,7 @@ public class UserResource
 		for (int i = 0; i < 10; i++)
 			encodedString = encoder.encode(password);
 
-		if(!userDetailsService.userExists(username))
+		if (!userDetailsService.userExists(username))
 			createdUser = userDetailsService.addUser(username, encodedString);
 		else
 			createdUser = userDetailsService.addUser("", "");

@@ -26,7 +26,7 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService
 	{
 		inMemoryUserList.add(new JwtUserDetails(20000L, "temp",
 				"$2a$10$KDLLS2LR6CN70N41MNRvLuE1pYytVd7S3Wf1qFYC8ToS71KLwHrhi", "ROLE_TEMP"));
-		
+
 		inMemoryUserList.add(new JwtUserDetails(20001L, "Scott",
 				"$2a$10$wcFzYpwf65cp2EEwes6cwur2zbRamOEqz4jqm.15pou9j6eUTSnBa", "ROLE_USER"));
 
@@ -36,18 +36,17 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService
 
 	public JwtUserDetails addUser(String username, String password)
 	{
-		
+
 		JwtUserDetails newUser = new JwtUserDetails(userCount, username, password, "ROLE_USER");
-		
-		if(!username.contentEquals(""))
+
+		if (!username.contentEquals(""))
 		{
 			inMemoryUserList.add(newUser);
-			userCount++;	
+			userCount++;
 			System.out.println("Created new user with username " + username);
-		}
-		else
+		} else
 			System.out.println("Did not create new user");
-		
+
 		return newUser;
 	}
 
@@ -77,12 +76,12 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService
 
 		return findFirst.get();
 	}
-	
+
 	public boolean userExists(String username)
 	{
 		Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
 				.filter(user -> user.getUsername().equals(username)).findFirst();
-		
+
 		return findFirst.isPresent();
 	}
 
