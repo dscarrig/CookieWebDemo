@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface TodoJpaRepository extends JpaRepository<Todo, Long>
 {
 	List<Todo> findByUsername(String username);
+	
 }

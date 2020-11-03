@@ -11,7 +11,6 @@ import com.rest.webservices.restfulwebservices.helloworld.AuthenticationBean;
 @RestController
 public class BasicAuthenticationController
 {
-	// hello-world-bean
 	@GetMapping(path = "/basicauth")
 	public AuthenticationBean hellowWorldBean()
 	{
