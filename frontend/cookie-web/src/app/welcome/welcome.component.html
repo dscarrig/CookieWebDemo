@@ -1,6 +1,9 @@
-<h1>
-  WELCOME!!!
-</h1>
+<style>
+  .aligncenter {
+    text-align: center;
+  }
+</style>
+
 
 <div class="container">
   <div style="text-align:center">
@@ -9,24 +12,27 @@
     </h1>
   </div>
 
+  <p class="aligncenter">
+    <img src="assets/Logo.png" width="600">
+  </p>
 
-  <div>🍪🍪(⋆‿⋆)🍪🍪 Infinite cookies await you!! 🍪🍪(⋆‿⋆)🍪🍪</div>
-  <br />
-  <div>
-    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
-    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
-    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
-    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
-    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
-    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
-  </div>
-  <br />
-  You can mange your pancakes (todos) <a routerLink="/todos">here</a>
-</div>
+  <p class="aligncenter">
+    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
+  </p>
 
-<div class="container">
-  Click here to get a customized pancake message
-  <button (click)="getWelcomeMessageWithParameter()" class="btn btn-success">Get Welcome Message</button>
+  <p class="aligncenter">
+    🍪🍪(⋆‿⋆)🍪🍪 Infinite cookies await you!! 🍪🍪(⋆‿⋆)🍪🍪
+  </p>
+
+  <p class="aligncenter">
+    🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪
+  </p>
+
+  <br />
+
+  <p class="aligncenter">
+    Check out our menu <a routerLink="/menu">here</a>.
+  </p>
 </div>
 
 <div class="container" *ngIf="welcomeMessageFromService">
