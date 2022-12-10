@@ -3,14 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\confirm-checkout",
-    "\\src\\app\\enter-user-info",
-    "\\src\\app\\modify-address",
-    "\\src\\app\\modify-card-num",
-    "\\src\\app\\my-account",
-    "\\src\\app\\todo",
-    "\\src\\app\\user-cart"
+    "\\src\\app\\menu",
+    "\\src\\app\\modify-address"
   ],
-  "SelectedNode": "\\src\\app\\enter-user-info\\enter-user-info.component.ts",
+  "SelectedNode": "\\src\\app\\menu\\menu.component.html",
   "PreviewInSolutionExplorer": false
 }
