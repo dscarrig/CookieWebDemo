@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "SET NODE_OPTIONS=--openssl-legacy-provider --no-deprecation && ng serve",
+    "build": "SET NODE_OPTIONS=--openssl-legacy-provider --no-deprecation && ng build",
+    "test": "SET NODE_OPTIONS=--openssl-legacy-provider --no-deprecation && ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "SET NODE_OPTIONS=--openssl-legacy-provider --no-deprecation && ng e2e"
+  },
+  "resolutions": {
+    "punycode": "^2.3.1"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +22,7 @@
     "@angular/platform-browser": "~10.0.6",
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
+    "punycode": "^2.3.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
@@ -27,9 +31,9 @@
     "@angular-devkit/build-angular": "~0.1000.5",
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "~10.0.6",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
