@@ -1,20 +1,23 @@
 package com.rest.webservices.restfulwebservices.basic.auth;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
 
 //@Configuration
 //@EnableWebSecurity
-public class SpringSecurityConfigurationBasic extends WebSecurityConfigurerAdapter
+public class SpringSecurityConfigurationBasic
 {
-	@Override
-	protected void configure(HttpSecurity http) throws Exception
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
 	{
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest()
-				.authenticated().and()
-				// .formLogin()
-				// .and()
-				.httpBasic();
+		return http.csrf(AbstractHttpConfigurer::disable)
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+						.anyRequest().authenticated())
+				.httpBasic(httpBasic -> httpBasic.realmName("JWT"))
+				.build();
 	}
 }

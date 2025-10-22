@@ -11,10 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.DefaultClock;
+import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
 
 @Component
 public class JwtTokenUtil implements Serializable
@@ -23,7 +23,6 @@ public class JwtTokenUtil implements Serializable
 	static final String CLAIM_KEY_USERNAME = "sub";
 	static final String CLAIM_KEY_CREATED = "iat";
 	private static final long serialVersionUID = -3301605591108950415L;
-	private Clock clock = DefaultClock.INSTANCE;
 
 	@Value("${jwt.signing.key.secret}")
 	private String secret;
@@ -54,13 +53,18 @@ public class JwtTokenUtil implements Serializable
 
 	private Claims getAllClaimsFromToken(String token)
 	{
-		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
+		return Jwts.parser()
+				.verifyWith(key)
+				.build()
+				.parseSignedClaims(token)
+				.getPayload();
 	}
 
 	private Boolean isTokenExpired(String token)
 	{
 		final Date expiration = getExpirationDateFromToken(token);
-		return expiration.before(clock.now());
+		return expiration.before(new Date());
 	}
 
 	private Boolean ignoreTokenExpiration(String token)
@@ -77,11 +81,17 @@ public class JwtTokenUtil implements Serializable
 
 	private String doGenerateToken(Map<String, Object> claims, String subject)
 	{
-		final Date createdDate = clock.now();
+		final Date createdDate = new Date();
 		final Date expirationDate = calculateExpirationDate(createdDate);
 
-		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
-				.setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, secret).compact();
+		SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
+		return Jwts.builder()
+				.claims(claims)
+				.subject(subject)
+				.issuedAt(createdDate)
+				.expiration(expirationDate)
+				.signWith(key)
+				.compact();
 	}
 
 	public Boolean canTokenBeRefreshed(String token)
@@ -91,14 +101,18 @@ public class JwtTokenUtil implements Serializable
 
 	public String refreshToken(String token)
 	{
-		final Date createdDate = clock.now();
+		final Date createdDate = new Date();
 		final Date expirationDate = calculateExpirationDate(createdDate);
 
 		final Claims claims = getAllClaimsFromToken(token);
-		claims.setIssuedAt(createdDate);
-		claims.setExpiration(expirationDate);
-
-		return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact();
+		
+		SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
+		return Jwts.builder()
+				.claims(claims)
+				.issuedAt(createdDate)
+				.expiration(expirationDate)
+				.signWith(key)
+				.compact();
 	}
 
 	public Boolean validateToken(String token, UserDetails userDetails)
