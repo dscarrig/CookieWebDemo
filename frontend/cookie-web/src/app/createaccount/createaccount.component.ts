@@ -23,11 +23,12 @@ export class CreateaccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.route.snapshot.params['id'] === 'fail')
+    if (this.route.snapshot.params.id === 'fail') {
       this.userExists = true;
+    }
   }
 
-  createUser() {
+  createUser(): void {
     console.log('Trying to create a user');
 
     this.createUserService.createUser(this.username, this.password);

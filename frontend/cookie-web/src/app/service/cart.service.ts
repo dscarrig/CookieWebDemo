@@ -14,31 +14,31 @@ export class CartService {
   ) { }
 
 
-  addToCart(username, id) {
+  addToCart(username: string, id: number): any {
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/add`, id);
   }
 
-  copyTempCart(username) {
-    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/copy-cart`, "temp");
+  copyTempCart(username: string): any {
+    return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/copy-cart`, 'temp');
   }
 
-  retrieveAllFromCart(username) {
+  retrieveAllFromCart(username: string): any {
     return this.http.get<ShopItem[]>(`${TODO_JPA_API_URL}/users/${username}/cart`);
   }
 
-  deleteFromCart(username, id) {
+  deleteFromCart(username: string, id: number): any {
     return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/cart/delete/${id}`);
   }
 
-  deleteAllFromCart(username) {
+  deleteAllFromCart(username: string): any {
     return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/cart/delete-all`);
   }
 
-  totalPriceOfCart(username) {
+  totalPriceOfCart(username: string): any {
     return this.http.get(`${TODO_JPA_API_URL}/users/${username}/cart/totalPrice`);
   }
 
-  totalItemsInCart(username) {
+  totalItemsInCart(username: string): any {
     return this.http.get(`${TODO_JPA_API_URL}/users/${username}/cart/totalItems`);
   }
 }

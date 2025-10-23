@@ -30,41 +30,47 @@ export class ModifyCardNumComponent implements OnInit {
       response => {
         this.accountDetailItem = response;
       }
-    )
+    );
   }
 
   saveNewCardNum() {
-    let username = this.basicAuthenticationService.getAuthenticatedUser();
-    var combinedInfo
+    const username = this.basicAuthenticationService.getAuthenticatedUser();
+    let combinedInfo;
 
-    if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '')
+    if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '') {
       combinedInfo = ' _ _ _ _ _ _' + this.cardNum;
-    else
+    }
+    else {
       combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.addressTwo + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_' + this.cardNum;
+    }
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
       response => {
         console.log(response);
         this.router.navigate(['my-account']);
       }
-    )
+    );
   }
 
   allInputEntered() {
-    if (this.cardNum === '')
+    if (this.cardNum === '') {
       return false;
-    else
+    }
+    else {
       return true;
+    }
   }
 
   cardNumCorrectFormat() {
     let correct = true;
 
-    if (this.cardNum.length != 16)
+    if (this.cardNum.length != 16) {
       correct = false;
+    }
 
-    if (this.cardNum.match(/^[0-9]+$/) == null)
+    if (this.cardNum.match(/^[0-9]+$/) == null) {
       correct = false;
+    }
 
     return correct;
   }

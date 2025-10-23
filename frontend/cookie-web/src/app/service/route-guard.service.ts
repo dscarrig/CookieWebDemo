@@ -13,8 +13,9 @@ export class RouteGuardService implements CanActivate{
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authenticationService.isUserLoggedIn())
+    if (this.authenticationService.isUserLoggedIn()) {
       return true;
+    }
     else {
       console.log('Blocked by dat route guard!');
       this.router.navigate(['login']);
@@ -25,8 +26,9 @@ export class RouteGuardService implements CanActivate{
   }
 
   notLogged(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!this.authenticationService.isUserLoggedIn())
+    if (!this.authenticationService.isUserLoggedIn()) {
       return true;
+    }
     else {
       console.log('Blocked by dat route guard!');
     }

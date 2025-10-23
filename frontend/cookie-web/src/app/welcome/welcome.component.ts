@@ -11,12 +11,12 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
 })
 export class WelcomeComponent implements OnInit {
 
-  title = 'Cookie Land'
-  message = 'Heya doo-doo head. '
-  name = ''
-  welcomeMessageFromService: string
+  title = 'Cookie Land';
+  message = 'Heya doo-doo head. ';
+  name = '';
+  welcomeMessageFromService: string;
 
-  //ActivatedRoute
+  // ActivatedRoute
   constructor(
     private route: ActivatedRoute,
     private service: WelcomeDataService,

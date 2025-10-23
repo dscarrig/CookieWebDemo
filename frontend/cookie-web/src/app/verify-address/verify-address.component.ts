@@ -28,7 +28,7 @@ export class VerifyAddressComponent implements OnInit {
         this.accountDetailItem = response;
         this.checkIfAddressSaved();
       }
-    )
+    );
   }
 
   checkIfAddressSaved() {
@@ -37,8 +37,9 @@ export class VerifyAddressComponent implements OnInit {
       || this.accountDetailItem.city === ' ' || this.accountDetailItem.city === ''
       || this.accountDetailItem.state === ' ' || this.accountDetailItem.state === ''
       || this.accountDetailItem.zipCode === ' ' || this.accountDetailItem.zipCode === ''
-      || this.accountDetailItem.cardNum === ' ' || this.accountDetailItem.cardNum === '' || this.accountDetailItem.cardNum === '-1')
+      || this.accountDetailItem.cardNum === ' ' || this.accountDetailItem.cardNum === '' || this.accountDetailItem.cardNum === '-1') {
       this.navigateToEnterUserInfo();
+    }
   }
 
   navigateToEnterUserInfo() {

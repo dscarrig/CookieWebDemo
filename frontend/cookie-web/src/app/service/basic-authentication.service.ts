@@ -3,8 +3,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-export const TOKEN = 'token'
-export const AUTHENTICATED_USER = 'authenticaterUser'
+export const TOKEN = 'token';
+export const AUTHENTICATED_USER = 'authenticaterUser';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class BasicAuthenticationService {
     private http: HttpClient
   ) { }
 
-  executeJWTAuthenticationService(username, password) {
+  executeJWTAuthenticationService(username: string, password: string): any {
 
     return this.http.post<any>(
       `${API_URL}/authenticate`, {
@@ -29,12 +29,12 @@ export class BasicAuthenticationService {
             return data;
           }
         )
-      )
+      );
   }
 
-  loginAsGuest() {
-    let username = 'temp';
-    let password = 'temp';
+  loginAsGuest(): any {
+    const username = 'temp';
+    const password = 'temp';
 
     return this.http.post<any>(
       `${API_URL}/authenticate`, {
@@ -49,24 +49,26 @@ export class BasicAuthenticationService {
           return data;
           }
         )
-      )
+      );
   }
 
-  getAuthenticatedUser() {
+  getAuthenticatedUser(): string | null {
     return sessionStorage.getItem(AUTHENTICATED_USER);
   }
 
-  getAuthenticatedToken() {
-    if (this.getAuthenticatedUser())
+  getAuthenticatedToken(): string | null {
+    if (this.getAuthenticatedUser()) {
       return sessionStorage.getItem(TOKEN);
+    }
+    return null;
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem(AUTHENTICATED_USER);
+  isUserLoggedIn(): boolean {
+    const user = sessionStorage.getItem(AUTHENTICATED_USER);
     return !(user === null) && !(user === 'temp');
   }
 
-  logout() {
+  logout(): void {
     sessionStorage.removeItem(AUTHENTICATED_USER);
     sessionStorage.removeItem(TOKEN);
     this.loginAsGuest();

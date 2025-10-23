@@ -12,11 +12,11 @@ export class ShopItemService {
     private http: HttpClient
   ) { }
 
-  retrieveItem(id) {
+  retrieveItem(id: number): any {
     return this.http.get<ShopItem>(`${TODO_JPA_API_URL}/items/${id}`);
   }
 
-  retrieveAllItems() {
+  retrieveAllItems(): any {
     return this.http.get<ShopItem[]>(`${TODO_JPA_API_URL}/items`);
   }
 }

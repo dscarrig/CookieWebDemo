@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   handleJWTAuthLogin() {
     console.log(this.username);
-  
+
     this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
       data => {
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           console.log(error);
           this.invalidLogin = true;
         }
-      )
+      );
   }
 
   goToCreateAccount() {
@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
     this.cartService.copyTempCart(this.username).subscribe(
       data => {
         this.appComponent.refreshMenu();
-        this.cartService.deleteAllFromCart("temp").subscribe(
+        this.cartService.deleteAllFromCart('temp').subscribe(
           data => { }
-        )
+        );
       }
-    )
+    );
   }
 
 

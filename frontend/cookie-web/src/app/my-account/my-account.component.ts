@@ -49,14 +49,14 @@ export class MyAccountComponent implements OnInit {
         this.accountDetailItem = response;
         this.defaultAccountDetailItem = this.accountDetailItem;
       }
-    )
+    );
 
     this.userInfoService.getAllUsersAccountDetails(this.username).subscribe(
       response => {
         this.allAccountDetailItems = response;
         this.allAccountDetailItems.reverse();
       }
-    )
+    );
   }
 
   modifyAddress() {
@@ -68,30 +68,32 @@ export class MyAccountComponent implements OnInit {
   }
 
   deleteAddress(toDelete) {
-   
+
     this.userInfoService.deleteUserDetail(this.username, toDelete).subscribe(
       response => {
         this.ngOnInit();
       }
-    )
+    );
 
   }
 
   deleteCardNum(toDelete) {
 
-    var combinedInfo
+    let combinedInfo;
 
-    if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '')
+    if (this.accountDetailItem.fullName === ' ' || this.accountDetailItem.fullName === '') {
       combinedInfo = ' _ _ _ _ _ _-1';
-    else
+    }
+    else {
       combinedInfo = this.accountDetailItem.fullName + '_' + this.accountDetailItem.address + '_' + this.accountDetailItem.addressTwo + '_' + this.accountDetailItem.city + '_' + this.accountDetailItem.state + '_' + this.accountDetailItem.zipCode + '_-1';
+    }
 
     this.userInfoService.addUserInfo(this.username, combinedInfo).subscribe(
       response => {
         console.log(response);
         this.ngOnInit();
       }
-    )
+    );
 
   }
 
@@ -100,7 +102,7 @@ export class MyAccountComponent implements OnInit {
       response => {
         this.ngOnInit();
       }
-    )
+    );
   }
 
   hasSavedAddress() {
@@ -116,18 +118,22 @@ export class MyAccountComponent implements OnInit {
   }
 
   checkIfValid(toCheck: string) {
-    if (toCheck === ' ' || toCheck === '' || toCheck === '-1')
+    if (toCheck === ' ' || toCheck === '' || toCheck === '-1') {
       return 0;
-    else
+    }
+    else {
       return 1;
+    }
   }
 
   isDefaultAccountDetailItem(compare) {
     console.log(`Default address is ${this.defaultAccountDetailItem.address}`);
     console.log(`Compare address is ${compare.address}`);
-    if (compare.address === this.defaultAccountDetailItem.address)
+    if (compare.address === this.defaultAccountDetailItem.address) {
       return 1;
-    else
+    }
+    else {
       return 0;
+    }
   }
 }

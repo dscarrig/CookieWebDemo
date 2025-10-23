@@ -9,7 +9,7 @@ import { BasicAuthenticationService } from '../basic-authentication.service';
 })
 export class CreateUserService {
 
-  userExists: Boolean = false
+  userExists = false;
 
   constructor(
     private http: HttpClient,
@@ -17,37 +17,38 @@ export class CreateUserService {
     private router: Router
   ) { }
 
-  createUser(username, password) {
+  createUser(username: string, password: string): void {
 
-    this.basicAuthenticationService.executeJWTAuthenticationService("temp", "temp")
+    this.basicAuthenticationService.executeJWTAuthenticationService('temp', 'temp')
       .subscribe(
-      data => {
+      response => {
 
-        this.http.get < Boolean >(`${API_URL}/users/exists/${username}`).subscribe(
-          data => {
-            this.userExists = data;
+        this.http.get<boolean>(`${API_URL}/users/exists/${username}`).subscribe(
+          userExistsData => {
+            this.userExists = userExistsData;
           }
-        )
+        );
 
         this.http.post(`${API_URL}/users/new/${username}`, password).subscribe(
-          data => {
-            console.log(data);
+          result => {
+            console.log(result);
             this.basicAuthenticationService.logout();
 
-            if (!this.userExists)
+            if (!this.userExists) {
               this.router.navigate(['success']);
-            else
+            } else {
               this.router.navigate(['createaccount', 'fail']);
+            }
           },
           error => {
             console.log(error);
           }
-        )
+        );
         },
         error => {
           console.log(error);
         }
-    )
+    );
   }
 
 }

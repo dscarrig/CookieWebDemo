@@ -47,7 +47,7 @@ export class ItemMenuComponent implements OnInit {
           this.username = this.authenticationService.getAuthenticatedUser();
           this.refreshItems();
         }
-      )
+      );
     }
   }
 
@@ -56,7 +56,7 @@ export class ItemMenuComponent implements OnInit {
       response => {
         this.shopItems = response;
       }
-    )
+    );
   }
 
   addItemToCart(item: ShopItem) {
@@ -66,7 +66,7 @@ export class ItemMenuComponent implements OnInit {
       response => {
         this.appComponent.refreshMenu();
       }
-    )
-    
+    );
+
   }
 }

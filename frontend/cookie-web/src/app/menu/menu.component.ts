@@ -9,8 +9,8 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  itemsInCart: Object;
-  userName: string;
+  itemsInCart = 0;
+  userName!: string;
 
   constructor(
     public basicAuthenticationService: BasicAuthenticationService,
@@ -21,27 +21,27 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.itemsInCart = 0;
     this.refreshMenu();
-    this.userName = this.basicAuthenticationService.getAuthenticatedUser();
+    this.userName = this.basicAuthenticationService.getAuthenticatedUser() || '';
   }
 
-  getItemsInCart() {
-    if (this.appComponent.getRefresh())
+  getItemsInCart(): number {
+    if (this.appComponent.getRefresh()) {
       this.refreshMenu();
+    }
 
     return this.itemsInCart;
   }
 
-  refreshMenu() {
-    this.userName = this.basicAuthenticationService.getAuthenticatedUser();
+  refreshMenu(): void {
+    this.userName = this.basicAuthenticationService.getAuthenticatedUser() || '';
 
     this.cartService.totalItemsInCart(this.userName).subscribe(
         response => {
           this.itemsInCart = response;
           this.appComponent.finishedRefreshing();
         }
-    )
-
+    );
   }
-    
+
 
 }

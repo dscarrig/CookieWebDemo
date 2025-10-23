@@ -21,14 +21,14 @@ export class ShopItem {
 })
 export class ShopItemComponent implements OnInit {
 
-  shopItems: ShopItem[]
+  shopItems: ShopItem[];
 
-  id: number
-  itemName: string
-  description: string
-  price: number
-  picture: string
-  shopItem: ShopItem
+  id: number;
+  itemName: string;
+  description: string;
+  price: number;
+  picture: string;
+  shopItem: ShopItem;
 
   constructor(
     private itemMenuServie: ShopItemService,
@@ -39,15 +39,15 @@ export class ShopItemComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id = this.route.snapshot.params['id'];
-    console.log(this.id)
+    this.id = this.route.snapshot.params.id;
+    console.log(this.id);
 
     this.shopItem = new ShopItem(this.id, this.itemName, this.description, this.price, this.picture);
 
-    if (this.id != -1) {
+    if (this.id !== -1) {
       this.itemMenuServie.retrieveItem(this.id).subscribe(
         data => this.shopItem = data
-      )
+      );
     }
   }
 

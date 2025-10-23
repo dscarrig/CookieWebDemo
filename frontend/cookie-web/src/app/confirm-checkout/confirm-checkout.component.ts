@@ -13,9 +13,9 @@ import { CartService } from '../service/cart.service';
 })
 export class ConfirmCheckoutComponent implements OnInit {
 
-  username: string;
-  accountDetailItem: AccountDetailItem;
-  shopItems: ShopItem[];
+  username!: string;
+  accountDetailItem!: AccountDetailItem;
+  shopItems!: ShopItem[];
 
   constructor(
     private userInfoService: UserInfoService,
@@ -25,7 +25,7 @@ export class ConfirmCheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.username = this.basicAuthenticationService.getAuthenticatedUser();
+    this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';
     this.shopItems = [new ShopItem(0, '0', '0', 0, '0')];
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
     this.refreshItems();
@@ -34,20 +34,20 @@ export class ConfirmCheckoutComponent implements OnInit {
       response => {
         this.accountDetailItem = response;
       }
-    )
+    );
   }
 
-  refreshItems() {
+  refreshItems(): void {
     this.cartService.retrieveAllFromCart(this.username).subscribe(
       response => {
         this.shopItems = response;
       }
-    )
+    );
   }
 
-  getCartTotal() {
+  getCartTotal(): number {
     let total = 0;
-    var i;
+    let i;
 
     for (i = 0; i < this.shopItems.length; i++) {
       total = total + this.shopItems[i].price;
@@ -56,11 +56,11 @@ export class ConfirmCheckoutComponent implements OnInit {
     return total;
   }
 
-  orderComplete() {
+  orderComplete(): void {
     this.router.navigate(['order-complete']);
   }
 
-  backToCart() {
+  backToCart(): void {
     this.router.navigate(['cart']);
   }
 

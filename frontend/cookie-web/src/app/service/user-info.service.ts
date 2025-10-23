@@ -12,44 +12,44 @@ export class UserInfoService {
     private http: HttpClient
   ) { }
 
-  addUserInfo(username, userInfo) {
-    console.log(`Adding info: ${userInfo}`)
+  addUserInfo(username: string, userInfo: string): any {
+    console.log(`Adding info: ${userInfo}`);
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/add`, userInfo);
   }
 
-  getUserAccountDetails(username) {
+  getUserAccountDetails(username: string): any {
     return this.http.get<AccountDetailItem>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-account-details`);
   }
 
-  getAllUsersAccountDetails(username) {
+  getAllUsersAccountDetails(username: string): any {
     return this.http.get<AccountDetailItem[]>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-all-users-account-details`);
   }
 
-  getUserAddress(username) {
+  getUserAddress(username: string): any {
     return this.http.get<string>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-address`);
   }
 
-  getUserCity(username) {
+  getUserCity(username: string): any {
     return this.http.get<string>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-city`);
   }
 
-  getUserState(username) {
+  getUserState(username: string): any {
     return this.http.get<string>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-state`);
   }
 
-  getUserZipCode(username) {
+  getUserZipCode(username: string): any {
     return this.http.get<string>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-zip-code`);
   }
 
-  getUserCardNumber(username) {
+  getUserCardNumber(username: string): any {
     return this.http.get<string>(`${TODO_JPA_API_URL}/users/${username}/account-details/get-card-number`);
   }
 
-  deleteUserDetail(username, toDelete) {
+  deleteUserDetail(username: string, toDelete: string): any {
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/delete-account-detail`, toDelete);
   }
 
-  setDefaultDetail(username, newDefault) {
+  setDefaultDetail(username: string, newDefault: string): any {
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/set-new-default`, newDefault);
   }
 }

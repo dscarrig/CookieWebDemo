@@ -11,9 +11,9 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
 })
 export class TodoComponent implements OnInit {
 
-  id: number
-  username: string
-  todo: Todo
+  id: number;
+  username: string;
+  todo: Todo;
 
   constructor(
     private todoService: TodoDataService,
@@ -24,29 +24,29 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser();
-    this.id = this.route.snapshot.params['id'];
-    console.log(this.id)
+    this.id = this.route.snapshot.params.id;
+    console.log(this.id);
 
     this.todo = new Todo(this.id, '', false, new Date());
 
-    if (this.id != -1) {
+    if (this.id !== -1) {
       this.todoService.retrieveTodo(this.username, this.id).subscribe(
         data => this.todo = data
-        )
+        );
     }
   }
 
-  saveTodo() {
+  saveTodo(): void {
 
-    if (this.id == -1) {
+    if (this.id === -1) {
       this.todoService.createTodo(this.username, this.todo)
         .subscribe(
         data => {
           console.log(data);
           this.router.navigate(['todos']);
         }
-          
-        )
+
+        );
     }
     else {
       this.todoService.updateTodo(this.username, this.id, this.todo)
@@ -55,7 +55,7 @@ export class TodoComponent implements OnInit {
           console.log(data);
           this.router.navigate(['todos']);
         }
-        )
+        );
     }
 
   }

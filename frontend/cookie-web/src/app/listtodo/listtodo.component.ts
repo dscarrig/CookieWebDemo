@@ -20,10 +20,10 @@ export class Todo {
 })
 export class ListtodoComponent implements OnInit {
 
-  todos: Todo[]
+  todos: Todo[];
 
-  message: string
-  username: string
+  message: string;
+  username: string;
 
   constructor(
     private todoService: TodoDataService,
@@ -31,12 +31,12 @@ export class ListtodoComponent implements OnInit {
     private router: Router
   ) { }
 
-  
+
   ngOnInit(): void {
 
     this.username = this.authenticationService.getAuthenticatedUser();
     this.refreshTodos();
-    
+
   }
 
   refreshTodos() {
@@ -45,7 +45,7 @@ export class ListtodoComponent implements OnInit {
         console.log(response);
         this.todos = response;
       }
-    )
+    );
   }
 
   updateTodo(id) {
@@ -57,16 +57,16 @@ export class ListtodoComponent implements OnInit {
     console.log(`delete todo ${id}`);
     this.todoService.deleteTodo(this.username, id).subscribe(
       response => {
-        console.log(response)
+        console.log(response);
         this.message = `Delete of Todo ${id} Successful!!`;
         this.refreshTodos();
       }
-    )
+    );
   }
 
   addTodo() {
     this.router.navigate(['todos', -1]);
   }
-  
+
 
 }

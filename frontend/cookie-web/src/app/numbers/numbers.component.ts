@@ -10,7 +10,7 @@ export class NumbersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
 }

@@ -34,8 +34,8 @@ export class UserCartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.username = this.authenticationService.getAuthenticatedUser()
-    this.shopItems = [new ShopItem(0,'0','0',0,'0')];
+    this.username = this.authenticationService.getAuthenticatedUser();
+    this.shopItems = [new ShopItem(0, '0', '0', 0, '0')];
     this.refreshItems();
   }
 
@@ -45,7 +45,7 @@ export class UserCartComponent implements OnInit {
         this.shopItems = response;
         this.appComponent.refreshMenu();
       }
-    )
+    );
   }
 
   removeItemFromCart(item: ShopItem) {
@@ -53,12 +53,12 @@ export class UserCartComponent implements OnInit {
       response => {
         this.refreshItems();
       }
-    )
+    );
   }
 
   getCartTotal() {
     let total = 0;
-    var i;
+    let i;
 
     for (i = 0; i < this.shopItems.length; i++) {
       total = total + this.shopItems[i].price;

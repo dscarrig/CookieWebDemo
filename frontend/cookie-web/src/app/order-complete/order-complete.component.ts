@@ -21,7 +21,7 @@ export class OrderCompleteComponent implements OnInit {
       data => {
         this.appComponent.refreshMenu();
       }
-    )
+    );
   }
 
 }

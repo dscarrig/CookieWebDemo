@@ -11,7 +11,7 @@ export class HelloWorldBean {
 export class WelcomeDataService {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
   executeHelloWorldBeanService() {
