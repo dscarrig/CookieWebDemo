@@ -24,7 +24,7 @@ export class ShopItem {
 export class ItemMenuComponent implements OnInit {
 
   shopItems: ShopItem[] = [];
-  username: string;
+  username!: string | null;
 
   constructor(
     private itemMenuService: ShopItemService,
@@ -68,11 +68,13 @@ export class ItemMenuComponent implements OnInit {
   addItemToCart(item: ShopItem) {
     console.log(`Added ${item.itemName} to cart`);
 
-    this.cartService.addToCart(this.username, item.id).subscribe(
-      (response: any) => {
-        this.appComponent.refreshMenu();
-      }
-    );
+    if (this.username) {
+      this.cartService.addToCart(this.username, item.id).subscribe(
+        (_response: any) => {
+          this.appComponent.refreshMenu();
+        }
+      );
+    }
 
   }
 }

@@ -45,3 +45,24 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Angular CLI
+.angular/
+
+# Package manager
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+*.tgz
+*.tar.gz
+
+# Runtime data
+*.pid
+*.seed
+*.log
