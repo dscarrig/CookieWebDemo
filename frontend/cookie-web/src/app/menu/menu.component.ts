@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit {
     this.userName = this.basicAuthenticationService.getAuthenticatedUser() || '';
 
     this.cartService.totalItemsInCart(this.userName).subscribe(
-        response => {
+      (response: number) => {
           this.itemsInCart = response;
           this.appComponent.finishedRefreshing();
         }

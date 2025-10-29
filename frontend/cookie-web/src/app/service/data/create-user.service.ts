@@ -21,7 +21,7 @@ export class CreateUserService {
 
     this.basicAuthenticationService.executeJWTAuthenticationService('temp', 'temp')
       .subscribe(
-      response => {
+        (_response: any) => {
 
         this.http.get<boolean>(`${API_URL}/users/exists/${username}`).subscribe(
           userExistsData => {
@@ -45,7 +45,7 @@ export class CreateUserService {
           }
         );
         },
-        error => {
+        (error: any) => {
           console.log(error);
         }
     );

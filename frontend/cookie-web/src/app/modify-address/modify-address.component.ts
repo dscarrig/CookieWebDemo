@@ -31,7 +31,7 @@ export class ModifyAddressComponent implements OnInit {
     this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
-      response => {
+      (response: AccountDetailItem) => {
         this.accountDetailItem = response;
       }
     );
@@ -39,6 +39,10 @@ export class ModifyAddressComponent implements OnInit {
 
   saveNewAddress(): void {
     const username = this.basicAuthenticationService.getAuthenticatedUser();
+    if (!username) {
+      return;
+    }
+    
     let combinedInfo;
 
     if (this.accountDetailItem.cardNum === '' || this.accountDetailItem.cardNum === '-1') {
@@ -50,7 +54,7 @@ export class ModifyAddressComponent implements OnInit {
     }
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
-      response => {
+      (response: any) => {
         console.log(response);
         this.router.navigate(['my-account']);
       }

@@ -33,7 +33,7 @@ export class EnterUserInfoComponent implements OnInit {
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
-      response => {
+      (response: AccountDetailItem) => {
         this.accountDetailItem = response;
         this.fullName = this.accountDetailItem.fullName;
         this.addressOne = this.accountDetailItem.address;
@@ -56,12 +56,14 @@ export class EnterUserInfoComponent implements OnInit {
     const combinedInfo = this.fullName + '_' + this.addressOne + '_' + this.addressTwo + '_' +
                         this.city + '_' + this.state + '_' + this.zipCode + '_' + this.creditCardNumber;
 
-    this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['confirm-checkout']);
-      }
-    );
+    if (username) {
+      this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.router.navigate(['confirm-checkout']);
+        }
+      );
+    }
   }
 
   backToCart(): void {

@@ -31,7 +31,7 @@ export class ConfirmCheckoutComponent implements OnInit {
     this.refreshItems();
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
-      response => {
+      (response: AccountDetailItem) => {
         this.accountDetailItem = response;
       }
     );
@@ -39,7 +39,7 @@ export class ConfirmCheckoutComponent implements OnInit {
 
   refreshItems(): void {
     this.cartService.retrieveAllFromCart(this.username).subscribe(
-      response => {
+      (response: ShopItem[]) => {
         this.shopItems = response;
       }
     );

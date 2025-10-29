@@ -11,9 +11,9 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
 })
 export class TodoComponent implements OnInit {
 
-  id: number;
-  username: string;
-  todo: Todo;
+  id!: number;
+  username!: string | null;
+  todo!: Todo;
 
   constructor(
     private todoService: TodoDataService,

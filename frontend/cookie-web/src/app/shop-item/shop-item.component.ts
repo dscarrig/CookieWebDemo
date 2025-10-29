@@ -21,14 +21,14 @@ export class ShopItem {
 })
 export class ShopItemComponent implements OnInit {
 
-  shopItems: ShopItem[];
+  shopItems!: ShopItem[];
 
-  id: number;
-  itemName: string;
-  description: string;
-  price: number;
-  picture: string;
-  shopItem: ShopItem;
+  id!: number;
+  itemName!: string;
+  description!: string;
+  price!: number;
+  picture!: string;
+  shopItem!: ShopItem;
 
   constructor(
     private itemMenuServie: ShopItemService,
@@ -46,7 +46,7 @@ export class ShopItemComponent implements OnInit {
 
     if (this.id !== -1) {
       this.itemMenuServie.retrieveItem(this.id).subscribe(
-        data => this.shopItem = data
+        (data: ShopItem) => this.shopItem = data
       );
     }
   }
