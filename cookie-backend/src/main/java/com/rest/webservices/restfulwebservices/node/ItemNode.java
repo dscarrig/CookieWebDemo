@@ -2,18 +2,29 @@ package com.rest.webservices.restfulwebservices.node;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 @Entity
+@Table(name = "item_node")
 public class ItemNode
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "item_name")
 	private String itemName;
+	
+	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "price")
 	private double price;
+	
+	@Column(name = "picture")
 	private String picture;
 
 	protected ItemNode()

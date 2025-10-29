@@ -23,11 +23,11 @@ export class ShopItem {
 })
 export class ItemMenuComponent implements OnInit {
 
-  shopItems: ShopItem[];
+  shopItems: ShopItem[] = [];
   username: string;
 
   constructor(
-    private itemMenuServie: ShopItemService,
+    private itemMenuService: ShopItemService,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: BasicAuthenticationService,
@@ -42,7 +42,7 @@ export class ItemMenuComponent implements OnInit {
     }
     else {
       this.authenticationService.loginAsGuest().subscribe(
-        response => {
+        (response: any) => {
           console.log(response);
           this.username = this.authenticationService.getAuthenticatedUser();
           this.refreshItems();
@@ -52,9 +52,15 @@ export class ItemMenuComponent implements OnInit {
   }
 
   refreshItems() {
-    this.itemMenuServie.retrieveAllItems().subscribe(
-      response => {
+    console.log('Fetching items from API...');
+    this.itemMenuService.retrieveAllItems().subscribe(
+      (response: ShopItem[]) => {
+        console.log('Items received:', response);
         this.shopItems = response;
+      },
+      (error: any) => {
+        console.error('Error fetching items:', error);
+        this.shopItems = [];
       }
     );
   }
@@ -63,7 +69,7 @@ export class ItemMenuComponent implements OnInit {
     console.log(`Added ${item.itemName} to cart`);
 
     this.cartService.addToCart(this.username, item.id).subscribe(
-      response => {
+      (response: any) => {
         this.appComponent.refreshMenu();
       }
     );

@@ -57,6 +57,8 @@ public class JWTWebSecurityConfig
 						.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/").permitAll()
 						.requestMatchers("/h2-console/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/jpa/items").permitAll() // Allow public access to menu items
+						.requestMatchers(HttpMethod.GET, "/jpa/items/**").permitAll() // Allow public access to individual menu items
 						.anyRequest().authenticated())
 				.headers(headers -> headers
 						.frameOptions(frame -> frame.sameOrigin())); // H2 Console Needs this setting

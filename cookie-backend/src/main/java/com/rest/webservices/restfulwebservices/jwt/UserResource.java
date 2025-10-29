@@ -47,11 +47,8 @@ public class UserResource
 	@PostMapping("/users/new/{username}")
 	public ResponseEntity<Void> createUser(@PathVariable String username, @RequestBody String password)
 	{
-		String encodedString = "";
+		String encodedString = encoder.encode(password);
 		JwtUserDetails createdUser = null;
-
-		for (int i = 0; i < 10; i++)
-			encodedString = encoder.encode(password);
 
 		if (!userDetailsService.userExists(username))
 			createdUser = userDetailsService.addUser(username, encodedString);

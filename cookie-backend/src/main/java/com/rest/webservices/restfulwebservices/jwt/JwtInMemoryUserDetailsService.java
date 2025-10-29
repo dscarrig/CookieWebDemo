@@ -47,7 +47,11 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService
 		if (!username.contentEquals(""))
 		{
 			inMemoryUserList.add(newUser);
-			userJpaRepository.save(new User(userCount, username, password));
+			// Create User entity without manual ID - let Hibernate auto-generate it
+			User user = new User();
+			user.setUserName(username);
+			user.setPassword(password);
+			userJpaRepository.save(user);
 			userCount++;
 		} else
 			System.out.println("Did not create new user");

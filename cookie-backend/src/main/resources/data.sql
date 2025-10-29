@@ -1,4 +1,3 @@
-/*
 INSERT INTO item_node (id, item_name, description, price, picture)
 VALUES (30001, 'Chocolate Chips', 'Cookie with chocolate chips', 9.99, 'assets/chocolate-chip.jpg');
 
@@ -13,4 +12,3 @@ VALUES (30004, 'Spice', 'Hot and spicy', 5.55, 'assets/spice.jpg');
 
 INSERT INTO item_node (id, item_name, description, price, picture)
 VALUES (30005, 'Everything Nice', 'Full of secret special ingredients', 4.19, 'assets/everything-nice.jpg');
-*/
