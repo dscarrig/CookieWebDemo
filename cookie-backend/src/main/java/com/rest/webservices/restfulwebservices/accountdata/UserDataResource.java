@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.rest.webservices.restfulwebservices.jwt.JwtInMemoryUserDetailsService;
+
 import com.rest.webservices.restfulwebservices.node.ItemNode;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,10 +25,10 @@ public class UserDataResource
 	@Autowired
 	private UserDetailsJpaRepository userDetailsRepository;
 
-	@Autowired
-	private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
+
 
 	@PostMapping("/jpa/users/{username}/account-details/add")
+	@Transactional
 	public ResponseEntity<ItemNode> addUserAccountData(@PathVariable String username, @RequestBody String userDetails)
 	{
 		UserDetailsNode newNode;
@@ -44,26 +45,39 @@ public class UserDataResource
 			String zipCode = detailArray[5];
 			String cardNum = detailArray[6];
 
-			Long id = jwtInMemoryUserDetailsService.loadUserByUsername(username).getId();
-
-			newNode = new UserDetailsNode(id, username, fullName, address, addressTwo, city, state, zipCode, cardNum);
+			// Let the database auto-generate the ID
+			newNode = new UserDetailsNode(null, username, fullName, address, addressTwo, city, state, zipCode, cardNum);
 
 			nodeList = userDetailsRepository.findByUsername(username);
 
-			for (int i = 0; i < nodeList.size(); i++)
-			{
-				if (nodeList.get(i).getAddress().contentEquals(address))
-				{
-					userDetailsRepository.delete(nodeList.get(i));
+			// Check if address already exists and update it, otherwise create new
+			UserDetailsNode existingNode = null;
+			for (UserDetailsNode node : nodeList) {
+				if (node.getAddress().contentEquals(address)) {
+					existingNode = node;
 					break;
 				}
 			}
 
-			userDetailsRepository.save(newNode);
+			if (existingNode != null) {
+				// Update existing entity instead of deleting and creating new one
+				existingNode.setFullName(fullName);
+				existingNode.setAddressTwo(addressTwo);
+				existingNode.setCity(city);
+				existingNode.setState(state);
+				existingNode.setZipCode(zipCode);
+				existingNode.setCardNum(cardNum);
+				userDetailsRepository.save(existingNode);
+				newNode = existingNode; // For the response
+			} else {
+				// Create new entity
+				userDetailsRepository.save(newNode);
+			}
 		} else
 		{
 			System.out.println("----> Wrong sized array: " + userDetails);
-			newNode = new UserDetailsNode(0L, username, "", "", "", "", "", "", "");
+			// Let the database auto-generate the ID for empty node too
+			newNode = new UserDetailsNode(null, username, "", "", "", "", "", "", "");
 		}
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newNode.getUsername())
@@ -71,6 +85,8 @@ public class UserDataResource
 
 		return ResponseEntity.created(uri).build();
 	}
+
+
 
 	@GetMapping("/jpa/users/{username}/account-details/get-account-details")
 	public UserDetailsNode getAccountDetails(@PathVariable String username)
@@ -100,6 +116,7 @@ public class UserDataResource
 	}
 
 	@PostMapping("/jpa/users/{username}/account-details/delete-account-detail")
+	@Transactional
 	public ResponseEntity<Void> deleteAccountDetail(@PathVariable String username,
 			@RequestBody UserDetailsNode toDelete)
 	{
@@ -110,6 +127,7 @@ public class UserDataResource
 			if (nodeList.get(i).getAddress().contentEquals(toDelete.getAddress()))
 			{
 				userDetailsRepository.delete(nodeList.get(i));
+				userDetailsRepository.flush(); // Ensure delete is committed
 				break;
 			}
 		}
@@ -118,6 +136,7 @@ public class UserDataResource
 	}
 
 	@PostMapping("/jpa/users/{username}/account-details/set-new-default")
+	@Transactional
 	public ResponseEntity<Void> setNewDefault(@PathVariable String username, @RequestBody UserDetailsNode newDefault)
 	{
 		List<UserDetailsNode> nodeList = userDetailsRepository.findByUsername(username);
@@ -127,6 +146,7 @@ public class UserDataResource
 			if (nodeList.get(i).getAddress().contentEquals(newDefault.getAddress()))
 			{
 				userDetailsRepository.delete(nodeList.get(i));
+				userDetailsRepository.flush(); // Ensure delete is committed before save
 				userDetailsRepository.save(newDefault);
 				break;
 			}

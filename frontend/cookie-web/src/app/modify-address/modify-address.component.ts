@@ -91,7 +91,7 @@ export class ModifyAddressComponent implements OnInit {
   zipCorrectFormat(): boolean {
     let correct = true;
 
-    if (this.zipCode.length !== 5) {
+    if (this.zipCode.length < 5) {
       correct = false;
     }
 

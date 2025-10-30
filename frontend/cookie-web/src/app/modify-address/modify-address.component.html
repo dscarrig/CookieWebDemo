@@ -12,27 +12,28 @@
 
 
 <div class="container">
+  <form #addressForm="ngForm">
+    <div>
+      Full Name : <input type="text" name="fullName" [(ngModel)]="fullName">
+      <br />
+      Address Line 1 : <input type="text" name="addressOne" [(ngModel)]="addressOne">
+      <br />
+      Address Line 2 : <input type="text" name="addressTwo" [(ngModel)]="addressTwo">
+      <br />
+      City : <input type="text" name="city" [(ngModel)]="city">
+      <br />
+      State : <input type="text" name="state" [(ngModel)]="state">
+      <br />
+      Zip Code : <input type="text" name="zipCode" [(ngModel)]="zipCode">
+      <br />
+      <br />
 
-  <div>
-    Full Name : <input type="text" [(ngModel)]="fullName">
-    <br />
-    Address Line 1 : <input type="text" [(ngModel)]="addressOne">
-    <br />
-    Address Line 2 : <input type="text" [(ngModel)]="addressTwo">
-    <br />
-    City : <input type="text" [(ngModel)]="city">
-    <br />
-    State : <input type="text" [(ngModel)]="state">
-    <br />
-    Zip Code : <input type="text" [(ngModel)]="zipCode">
-    <br />
-    <br />
+      <button *ngIf="allInputEntered() && allCorrectFormat()" (click)="saveNewAddress()" class="btn btn-success">Save New Address</button>
+      <div class="alert alert-warning" *ngIf="!allInputEntered() || !allCorrectFormat()">Please fill out address.</div>
+      <br />
+      <br />
+      <button (click)="backToUserInfo()" class="btn btn-success">Cancel</button>
 
-    <button *ngIf="allInputEntered() && allCorrectFormat()" (click)=saveNewAddress() class="btn btn-success">Save New Address</button>
-    <div class="alert alert-warning" *ngIf="!allInputEntered() || !allCorrectFormat()">Please fill out address.</div>
-    <br />
-    <br />
-    <button (click)=backToUserInfo() class="btn btn-success">Cancel</button>
-
-  </div>
+    </div>
+  </form>
 </div>

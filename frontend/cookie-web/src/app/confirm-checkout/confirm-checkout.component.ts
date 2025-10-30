@@ -32,7 +32,11 @@ export class ConfirmCheckoutComponent implements OnInit {
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
       (response: AccountDetailItem) => {
+        console.log('Account details loaded:', response);
         this.accountDetailItem = response;
+      },
+      (error: any) => {
+        console.error('Error loading account details:', error);
       }
     );
   }
@@ -40,12 +44,21 @@ export class ConfirmCheckoutComponent implements OnInit {
   refreshItems(): void {
     this.cartService.retrieveAllFromCart(this.username).subscribe(
       (response: ShopItem[]) => {
+        console.log('Cart items loaded:', response);
         this.shopItems = response;
+      },
+      (error: any) => {
+        console.error('Error loading cart items:', error);
+        this.shopItems = [];
       }
     );
   }
 
   getCartTotal(): number {
+    if (!this.shopItems || this.shopItems.length === 0) {
+      return 0;
+    }
+    
     let total = 0;
     let i;
 
