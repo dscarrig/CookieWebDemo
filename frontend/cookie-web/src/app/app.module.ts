@@ -28,6 +28,7 @@ import { VerifyAddressComponent } from './verify-address/verify-address.componen
 import { ConfirmCheckoutComponent } from './confirm-checkout/confirm-checkout.component';
 import { OrderCompleteComponent } from './order-complete/order-complete.component';
 import { ModifyCardNumComponent } from './modify-card-num/modify-card-num.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ModifyCardNumComponent } from './modify-card-num/modify-card-num.compon
     VerifyAddressComponent,
     ConfirmCheckoutComponent,
     OrderCompleteComponent,
-    ModifyCardNumComponent
+    ModifyCardNumComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,

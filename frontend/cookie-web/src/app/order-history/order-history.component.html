@@ -1,0 +1,25 @@
+<div *ngIf="username" class="order-history-container">
+  <!-- TODO: Replace with actual order data -->
+  <div *ngIf="hasOrders(); else noOrders">
+    <div class="order-item" *ngFor="let order of orders">
+      <div class="order-header">
+        <strong>Order #{{order.id}}</strong> - {{order.date}}
+        <span class="order-status">{{order.status}}</span>
+      </div>
+      <div class="order-details">
+        <p>Total: ${{order.total}}</p>
+        <!-- Add more order details as needed -->
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noOrders>
+    <div class="no-orders">
+      <p>No order history found.</p>
+    </div>
+  </ng-template>
+</div>
+
+<div *ngIf="!username">
+  <p>Please log in to view your order history.</p>
+</div>
