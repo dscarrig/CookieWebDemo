@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,42 +30,36 @@ import { OrderCompleteComponent } from './order-complete/order-complete.componen
 import { ModifyCardNumComponent } from './modify-card-num/modify-card-num.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeComponent,
-    NumbersComponent,
-    LoginComponent,
-    ErrorComponent,
-    ListtodoComponent,
-    MenuComponent,
-    FooterComponent,
-    LogoutComponent,
-    TodoComponent,
-    CreateaccountComponent,
-    SuccessComponent,
-    ItemMenuComponent,
-    ShopItemComponent,
-    UserCartComponent,
-    EnterUserInfoComponent,
-    CheckoutComponent,
-    MyAccountComponent,
-    ModifyAddressComponent,
-    VerifyAddressComponent,
-    ConfirmCheckoutComponent,
-    OrderCompleteComponent,
-    ModifyCardNumComponent,
-    OrderHistoryComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        WelcomeComponent,
+        NumbersComponent,
+        LoginComponent,
+        ErrorComponent,
+        ListtodoComponent,
+        MenuComponent,
+        FooterComponent,
+        LogoutComponent,
+        TodoComponent,
+        CreateaccountComponent,
+        SuccessComponent,
+        ItemMenuComponent,
+        ShopItemComponent,
+        UserCartComponent,
+        EnterUserInfoComponent,
+        CheckoutComponent,
+        MyAccountComponent,
+        ModifyAddressComponent,
+        VerifyAddressComponent,
+        ConfirmCheckoutComponent,
+        OrderCompleteComponent,
+        ModifyCardNumComponent,
+        OrderHistoryComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
