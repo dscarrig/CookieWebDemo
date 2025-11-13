@@ -1,7 +1,7 @@
 <h1>{{accountDetailItem.username}}'s Account</h1>
 
 
-<div *ngIf="hasSavedAddress() == 1" class="container">
+<div *ngIf="hasSavedAddress() === 1" class="container">
   <table class="table">
 
     <tbody>
@@ -19,8 +19,8 @@
         </td>
 
         <td>
-          <div class="alert alert-warning" *ngIf="isDefaultAccountDetailItem(accountDetailItem) == 1">Default Address</div>
-          <button *ngIf="isDefaultAccountDetailItem(accountDetailItem) == 0" (click)="setAsDefault(accountDetailItem)" class="btn-success">Set As Default</button>
+          <div class="alert alert-warning" *ngIf="isDefaultAccountDetailItem(accountDetailItem) === 1">Default Address</div>
+          <button *ngIf="isDefaultAccountDetailItem(accountDetailItem) === 0" (click)="setAsDefault(accountDetailItem)" class="btn-success">Set As Default</button>
           <br />
           <br />
           <button (click)="deleteAddress(accountDetailItem)" class="btn-success">Delete Address</button>
@@ -33,7 +33,7 @@
 </div>
 
 
-<div *ngIf="hasSavedAddress() == 0">
+<div *ngIf="hasSavedAddress() === 0">
   <h3>You have no saved address.</h3>
 </div>
 
@@ -43,19 +43,19 @@
   <br />
 </div>
 
-<div *ngIf="hasSavedCardNum() == 1">
+<div *ngIf="hasSavedCardNum() === 1">
   <br />
   <h3>Saved card number for {{accountDetailItem.fullName}}:</h3>
   {{accountDetailItem.cardNum}}
   <button (click)="deleteCardNum(accountDetailItem)" class="btn-success">Delete Payment Info</button>
 </div>
 
-<div *ngIf="hasSavedCardNum() == 0 && hasSavedAddress() == 1">
+<div *ngIf="hasSavedCardNum() === 0 && hasSavedAddress() === 1">
   <br />
   <h3>No saved card number for {{accountDetailItem.fullName}}.</h3>
 </div>
 
-<div *ngIf="hasSavedCardNum() == 0 && hasSavedAddress() == 0">
+<div *ngIf="hasSavedCardNum() === 0 && hasSavedAddress() === 0">
   <br />
   <h3>No saved card number.</h3>
 </div>

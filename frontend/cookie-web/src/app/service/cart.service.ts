@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { API_URL, TODO_JPA_API_URL } from '../app.constants';
+import { TODO_JPA_API_URL } from '../app.constants';
 import { ShopItem } from '../shop-item/shop-item.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private http = inject(HttpClient);
 
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor() {}
 
 
   addToCart(username: string, id: number): any {

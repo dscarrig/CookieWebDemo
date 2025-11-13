@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,10 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./success.component.css']
 })
 export class SuccessComponent implements OnInit {
+  private router = inject(Router);
 
-  constructor(
-    private router: Router
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
   }

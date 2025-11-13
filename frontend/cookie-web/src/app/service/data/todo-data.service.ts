@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todo } from '../../listtodo/listtodo.component';
-import { API_URL, TODO_JPA_API_URL } from '../../app.constants';
+import { TODO_JPA_API_URL } from '../../app.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoDataService {
+  private http = inject(HttpClient);
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   retrieveTodo(username, id) {
     return this.http.get<Todo>(`${TODO_JPA_API_URL}/users/${username}/todos/${id}`);

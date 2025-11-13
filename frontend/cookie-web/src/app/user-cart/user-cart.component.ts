@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { CartService } from '../service/cart.service';
@@ -21,17 +21,20 @@ export class ShopItem {
   styleUrls: ['./user-cart.component.css']
 })
 export class UserCartComponent implements OnInit {
+  private cartService = inject(CartService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  authenticationService = inject(BasicAuthenticationService);
+  private appComponent = inject(AppComponent);
+
 
   shopItems: ShopItem[];
   username: string;
 
-  constructor(
-    private cartService: CartService,
-    private route: ActivatedRoute,
-    private router: Router,
-    public authenticationService: BasicAuthenticationService,
-    private appComponent: AppComponent
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser();
@@ -50,7 +53,7 @@ export class UserCartComponent implements OnInit {
 
   removeItemFromCart(item: ShopItem) {
     this.cartService.deleteFromCart(this.username, item.id).subscribe(
-      response => {
+      () => {
         this.refreshItems();
       }
     );

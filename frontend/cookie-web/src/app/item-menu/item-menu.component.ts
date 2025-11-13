@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ShopItemService } from '../service/data/item-menu-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
@@ -22,18 +22,21 @@ export class ShopItem {
   styleUrls: ['./item-menu.component.css']
 })
 export class ItemMenuComponent implements OnInit {
+  private itemMenuService = inject(ShopItemService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private authenticationService = inject(BasicAuthenticationService);
+  private cartService = inject(CartService);
+  private appComponent = inject(AppComponent);
+
 
   shopItems: ShopItem[] = [];
   username!: string | null;
 
-  constructor(
-    private itemMenuService: ShopItemService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: BasicAuthenticationService,
-    private cartService: CartService,
-    private appComponent: AppComponent
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
@@ -70,7 +73,7 @@ export class ItemMenuComponent implements OnInit {
 
     if (this.username) {
       this.cartService.addToCart(this.username, item.id).subscribe(
-        (_response: any) => {
+        () => {
           this.appComponent.refreshMenu();
         }
       );

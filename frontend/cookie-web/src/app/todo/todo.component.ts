@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Todo } from '../listtodo/listtodo.component';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
@@ -10,17 +10,20 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
+  private todoService = inject(TodoDataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private authenticationService = inject(BasicAuthenticationService);
+
 
   id!: number;
   username!: string | null;
   todo!: Todo;
 
-  constructor(
-    private todoService: TodoDataService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: BasicAuthenticationService
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser();

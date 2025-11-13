@@ -1,5 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+interface Order {
+  id: string;
+  date: string;
+  status: string;
+  total: number;
+}
+
 @Component({
   selector: 'app-order-history',
   templateUrl: './order-history.component.html',
@@ -7,9 +14,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class OrderHistoryComponent implements OnInit {
   @Input() username?: string;
-  orders: any[] = []; // TODO: Create proper Order interface/model
+  orders: Order[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     // Initialize order history for the given username

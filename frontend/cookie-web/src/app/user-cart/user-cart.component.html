@@ -35,7 +35,7 @@
     </table>
   </div>
 
-  <div *ngIf="getCartTotal() == 0" class="container">
+  <div *ngIf="getCartTotal() === 0" class="container">
     Cart is empty.
     <br />
     <button (click)="goToMenu()" class="btn-success">Go to the menu to add items to the cart.</button>

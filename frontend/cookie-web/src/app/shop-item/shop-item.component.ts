@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ShopItemService } from '../service/data/item-menu-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
@@ -20,6 +20,11 @@ export class ShopItem {
   styleUrls: ['./shop-item.component.css']
 })
 export class ShopItemComponent implements OnInit {
+  private itemMenuServie = inject(ShopItemService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private authenticationService = inject(BasicAuthenticationService);
+
 
   shopItems!: ShopItem[];
 
@@ -30,12 +35,10 @@ export class ShopItemComponent implements OnInit {
   picture!: string;
   shopItem!: ShopItem;
 
-  constructor(
-    private itemMenuServie: ShopItemService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: BasicAuthenticationService
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
 

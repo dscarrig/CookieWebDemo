@@ -9,8 +9,6 @@ export class ErrorComponent implements OnInit {
 
   errorMessage = 'A grave error occured';
 
-  constructor() { }
-
   ngOnInit(): void {
   }
 

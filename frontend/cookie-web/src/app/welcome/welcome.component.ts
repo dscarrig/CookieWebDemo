@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppComponent } from '../app.component';
 import { WelcomeDataService } from '../service/data/welcome-data.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
@@ -10,20 +9,21 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private service = inject(WelcomeDataService);
+  basicAuthenticationService = inject(BasicAuthenticationService);
+
 
   title = 'Cookie Land';
   message = 'Heya doo-doo head. ';
   name = '';
   welcomeMessageFromService: string;
 
-  // ActivatedRoute
-  constructor(
-    private route: ActivatedRoute,
-    private service: WelcomeDataService,
-    public basicAuthenticationService: BasicAuthenticationService
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
 
-  }
+  // ActivatedRoute
+  constructor() {}
 
   ngOnInit(): void {
     console.log(this.message);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { CartService } from '../service/cart.service';
 import { AppComponent } from '../app.component';
@@ -9,14 +9,17 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  basicAuthenticationService = inject(BasicAuthenticationService);
+  private cartService = inject(CartService);
+  private appComponent = inject(AppComponent);
+
   itemsInCart = 0;
   userName!: string;
 
-  constructor(
-    public basicAuthenticationService: BasicAuthenticationService,
-    private cartService: CartService,
-    private appComponent: AppComponent
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.itemsInCart = 0;

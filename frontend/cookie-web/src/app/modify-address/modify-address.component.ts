@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { UserInfoService } from '../service/user-info.service';
 import { AccountDetailItem } from '../my-account/my-account.component';
@@ -10,6 +10,10 @@ import { AccountDetailItem } from '../my-account/my-account.component';
   styleUrls: ['./modify-address.component.css']
 })
 export class ModifyAddressComponent implements OnInit {
+  private router = inject(Router);
+  private userInfoService = inject(UserInfoService);
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+
   accountDetailItem!: AccountDetailItem;
   username = '';
   fullName = '';
@@ -19,11 +23,10 @@ export class ModifyAddressComponent implements OnInit {
   state = '';
   zipCode = '';
 
-  constructor(
-    private router: Router,
-    private userInfoService: UserInfoService,
-    private basicAuthenticationService: BasicAuthenticationService
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');

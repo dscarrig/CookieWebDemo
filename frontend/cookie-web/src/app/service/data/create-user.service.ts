@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../../app.constants';
 import { Router } from '@angular/router';
@@ -8,14 +8,17 @@ import { BasicAuthenticationService } from '../basic-authentication.service';
   providedIn: 'root'
 })
 export class CreateUserService {
+  private http = inject(HttpClient);
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+  private router = inject(Router);
+
 
   userExists = false;
 
-  constructor(
-    private http: HttpClient,
-    private basicAuthenticationService: BasicAuthenticationService,
-    private router: Router
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   createUser(username: string, password: string): void {
 

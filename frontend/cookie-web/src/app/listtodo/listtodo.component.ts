@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
@@ -19,17 +18,20 @@ export class Todo {
   styleUrls: ['./listtodo.component.css']
 })
 export class ListtodoComponent implements OnInit {
+  private todoService = inject(TodoDataService);
+  private authenticationService = inject(BasicAuthenticationService);
+  private router = inject(Router);
+
 
   todos: Todo[];
 
   message: string;
   username: string;
 
-  constructor(
-    private todoService: TodoDataService,
-    private authenticationService: BasicAuthenticationService,
-    private router: Router
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
 
   ngOnInit(): void {

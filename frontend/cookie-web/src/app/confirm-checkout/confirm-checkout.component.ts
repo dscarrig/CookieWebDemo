@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserInfoService } from '../service/user-info.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountDetailItem } from '../my-account/my-account.component';
 import { ShopItem } from '../shop-item/shop-item.component';
 import { CartService } from '../service/cart.service';
@@ -12,17 +12,20 @@ import { CartService } from '../service/cart.service';
   styleUrls: ['./confirm-checkout.component.css']
 })
 export class ConfirmCheckoutComponent implements OnInit {
+  private userInfoService = inject(UserInfoService);
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+  private router = inject(Router);
+  private cartService = inject(CartService);
+
 
   username!: string;
   accountDetailItem!: AccountDetailItem;
   shopItems!: ShopItem[];
 
-  constructor(
-    private userInfoService: UserInfoService,
-    private basicAuthenticationService: BasicAuthenticationService,
-    private router: Router,
-    private cartService: CartService
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';

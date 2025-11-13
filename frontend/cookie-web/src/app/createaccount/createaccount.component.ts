@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CreateUserService } from '../service/data/create-user.service';
@@ -9,6 +9,10 @@ import { CreateUserService } from '../service/data/create-user.service';
   styleUrls: ['./createaccount.component.css']
 })
 export class CreateaccountComponent implements OnInit {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private createUserService = inject(CreateUserService);
+
 
   username = '';
   password = '';
@@ -16,11 +20,10 @@ export class CreateaccountComponent implements OnInit {
   invalidLogin = false;
   userExists = false;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private createUserService: CreateUserService
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     if (this.route.snapshot.params.id === 'fail') {

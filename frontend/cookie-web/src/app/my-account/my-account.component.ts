@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserInfoService } from '../service/user-info.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 export class AccountDetailItem {
   constructor(
@@ -24,16 +24,19 @@ export class AccountDetailItem {
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
+  private userInfoService = inject(UserInfoService);
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+  private router = inject(Router);
+
   username: string;
   accountDetailItem: AccountDetailItem;
   defaultAccountDetailItem: AccountDetailItem;
   allAccountDetailItems: AccountDetailItem[];
 
-  constructor(
-    private userInfoService: UserInfoService,
-    private basicAuthenticationService: BasicAuthenticationService,
-    private router: Router
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
@@ -70,7 +73,7 @@ export class MyAccountComponent implements OnInit {
   deleteAddress(toDelete) {
 
     this.userInfoService.deleteUserDetail(this.username, toDelete).subscribe(
-      response => {
+      () => {
         this.ngOnInit();
       }
     );

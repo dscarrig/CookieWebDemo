@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { BasicAuthenticationService } from './basic-authentication.service';
 
@@ -6,13 +6,15 @@ import { BasicAuthenticationService } from './basic-authentication.service';
   providedIn: 'root'
 })
 export class RouteGuardService {
+  private authenticationService = inject(BasicAuthenticationService);
+  private router = inject(Router);
 
-  constructor(
-    private authenticationService: BasicAuthenticationService,
-    private router: Router
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  constructor() {}
+
+  canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) {
     if (this.authenticationService.isUserLoggedIn()) {
       return true;
     }
@@ -25,7 +27,7 @@ export class RouteGuardService {
     return false;
   }
 
-  notLogged(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  notLogged(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) {
     if (!this.authenticationService.isUserLoggedIn()) {
       return true;
     }

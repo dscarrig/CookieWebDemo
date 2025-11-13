@@ -1,6 +1,6 @@
 import { API_URL } from './../app.constants';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 export const TOKEN = 'token';
@@ -10,10 +10,12 @@ export const AUTHENTICATED_USER = 'authenticaterUser';
   providedIn: 'root'
 })
 export class BasicAuthenticationService {
+  private http = inject(HttpClient);
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   executeJWTAuthenticationService(username: string, password: string): any {
 

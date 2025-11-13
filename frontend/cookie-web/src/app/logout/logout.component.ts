@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { AppComponent } from '../app.component';
 
@@ -8,11 +8,13 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+  private appComponent = inject(AppComponent);
 
-  constructor(
-    private basicAuthenticationService: BasicAuthenticationService,
-    private appComponent: AppComponent
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.basicAuthenticationService.logout();

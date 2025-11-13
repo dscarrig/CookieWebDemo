@@ -1,5 +1,5 @@
 import { BasicAuthenticationService } from './../service/basic-authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../service/cart.service';
 import { AppComponent } from '../app.component';
@@ -10,18 +10,21 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private router = inject(Router);
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+  private cartService = inject(CartService);
+  private appComponent = inject(AppComponent);
+
 
   username = '';
   password = '';
   errorMessage = 'Invalid Creds';
   invalidLogin = false;
 
-  constructor(
-    private router: Router,
-    private basicAuthenticationService: BasicAuthenticationService,
-    private cartService: CartService,
-    private appComponent: AppComponent
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
   }
@@ -31,7 +34,7 @@ export class LoginComponent implements OnInit {
 
     this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
-      data => {
+      () => {
         console.log('logging in!');
         this.tranferTempCart();
         this.router.navigate(['welcome', this.username]);
@@ -50,11 +53,9 @@ export class LoginComponent implements OnInit {
 
   tranferTempCart() {
     this.cartService.copyTempCart(this.username).subscribe(
-      data => {
+      () => {
         this.appComponent.refreshMenu();
-        this.cartService.deleteAllFromCart('temp').subscribe(
-          data => { }
-        );
+        this.cartService.deleteAllFromCart('temp').subscribe();
       }
     );
   }

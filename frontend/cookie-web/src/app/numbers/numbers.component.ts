@@ -6,11 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./numbers.component.css']
 })
 export class NumbersComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit(): void {
-
   }
-
 }

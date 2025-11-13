@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserInfoService } from '../service/user-info.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountDetailItem } from '../my-account/my-account.component';
 
 @Component({
@@ -10,14 +10,17 @@ import { AccountDetailItem } from '../my-account/my-account.component';
   styleUrls: ['./verify-address.component.css']
 })
 export class VerifyAddressComponent implements OnInit {
+  private userInfoService = inject(UserInfoService);
+  private basicAuthenticationService = inject(BasicAuthenticationService);
+  private router = inject(Router);
+
   username: string;
   accountDetailItem: AccountDetailItem;
 
-  constructor(
-    private userInfoService: UserInfoService,
-    private basicAuthenticationService: BasicAuthenticationService,
-    private router: Router
-  ) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser();
