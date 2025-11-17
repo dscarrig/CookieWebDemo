@@ -9,12 +9,7 @@ import { TODO_JPA_API_URL } from '../../app.constants';
 export class TodoDataService {
   private http = inject(HttpClient);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
-  retrieveTodo(username, id) {
+  retrieveTodo(username: string, id: number) {
     return this.http.get<Todo>(`${TODO_JPA_API_URL}/users/${username}/todos/${id}`);
   }
 

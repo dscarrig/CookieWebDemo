@@ -19,11 +19,6 @@ export class ModifyCardNumComponent implements OnInit {
   username = '';
   cardNum = '';
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
 

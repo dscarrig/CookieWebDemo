@@ -28,12 +28,6 @@ export class ListtodoComponent implements OnInit {
   message: string;
   username: string;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
-
   ngOnInit(): void {
 
     this.username = this.authenticationService.getAuthenticatedUser();

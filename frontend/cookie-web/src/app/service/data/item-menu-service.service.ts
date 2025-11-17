@@ -9,11 +9,6 @@ import { ShopItem } from '../../shop-item/shop-item.component';
 export class ShopItemService {
   private http = inject(HttpClient);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   retrieveItem(id: number): any {
     return this.http.get<ShopItem>(`${TODO_JPA_API_URL}/items/${id}`);
   }

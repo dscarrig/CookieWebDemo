@@ -20,11 +20,6 @@ export class TodoComponent implements OnInit {
   username!: string | null;
   todo!: Todo;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser();
     this.id = this.route.snapshot.params.id;

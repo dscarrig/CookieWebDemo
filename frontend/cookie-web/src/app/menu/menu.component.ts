@@ -16,11 +16,6 @@ export class MenuComponent implements OnInit {
   itemsInCart = 0;
   userName!: string;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.itemsInCart = 0;
     this.refreshMenu();

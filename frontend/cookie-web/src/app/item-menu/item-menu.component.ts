@@ -33,11 +33,6 @@ export class ItemMenuComponent implements OnInit {
   shopItems: ShopItem[] = [];
   username!: string | null;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
       this.username = this.authenticationService.getAuthenticatedUser();

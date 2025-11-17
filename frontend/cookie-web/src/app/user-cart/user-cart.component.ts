@@ -15,6 +15,17 @@ export class ShopItem {
   ) { }
 }
 
+export class CartItem {
+  constructor(
+    public item: ShopItem,
+    public quantity: number
+  ) { }
+
+  get totalPrice(): number {
+    return this.item.price * this.quantity;
+  }
+}
+
 @Component({
   selector: 'app-user-cart',
   templateUrl: './user-cart.component.html',
@@ -29,12 +40,8 @@ export class UserCartComponent implements OnInit {
 
 
   shopItems: ShopItem[];
+  cartItems: CartItem[] = [];
   username: string;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser();
@@ -46,17 +53,55 @@ export class UserCartComponent implements OnInit {
     this.cartService.retrieveAllFromCart(this.username).subscribe(
       response => {
         this.shopItems = response;
+        this.groupItems();
         this.appComponent.refreshMenu();
       }
     );
   }
 
-  removeItemFromCart(item: ShopItem) {
-    this.cartService.deleteFromCart(this.username, item.id).subscribe(
+  private groupItems() {
+    const itemMap = new Map<number, CartItem>();
+    
+    this.shopItems.forEach(item => {
+      if (itemMap.has(item.id)) {
+        const cartItem = itemMap.get(item.id)!;
+        cartItem.quantity++;
+      } else {
+        itemMap.set(item.id, new CartItem(item, 1));
+      }
+    });
+    
+    this.cartItems = Array.from(itemMap.values());
+  }
+
+  removeItemFromCart(cartItem: CartItem) {
+    // Remove one instance of the item
+    this.cartService.deleteFromCart(this.username, cartItem.item.id).subscribe(
       () => {
         this.refreshItems();
       }
     );
+  }
+
+  removeAllOfItem(cartItem: CartItem) {
+    // Remove all instances of this item
+    const deleteObservables = [];
+    for (let i = 0; i < cartItem.quantity; i++) {
+      deleteObservables.push(
+        this.cartService.deleteFromCart(this.username, cartItem.item.id)
+      );
+    }
+    
+    // Execute all delete operations
+    let completed = 0;
+    deleteObservables.forEach(obs => {
+      obs.subscribe(() => {
+        completed++;
+        if (completed === deleteObservables.length) {
+          this.refreshItems();
+        }
+      });
+    });
   }
 
   getCartTotal() {

@@ -9,15 +9,23 @@
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let shopItem of shopItems">
-          <td>{{shopItem.itemName}}</td>
-          <td>{{shopItem.description}}</td>
-          <td>{{shopItem.price}}</td>
-          <td><button (click)="removeItemFromCart(shopItem)" class="btn-success">Remove from cart</button></td>
+        <tr *ngFor="let cartItem of cartItems">
+          <td>{{cartItem.item.itemName}}</td>
+          <td>{{cartItem.item.description}}</td>
+          <td>${{cartItem.item.price.toFixed(2)}}</td>
+          <td>{{cartItem.quantity}}</td>
+          <td>${{cartItem.totalPrice.toFixed(2)}}</td>
+          <td>
+            <button (click)="removeItemFromCart(cartItem)" class="btn-success" style="margin-right: 5px;">Remove One</button>
+            <button (click)="removeAllOfItem(cartItem)" class="btn-danger">Remove All</button>
+          </td>
         </tr>
       </tbody>
 

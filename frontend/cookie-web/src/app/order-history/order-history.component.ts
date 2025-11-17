@@ -1,11 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-interface Order {
-  id: string;
-  date: string;
-  status: string;
-  total: number;
-}
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { OrderService, Order } from '../service/order.service';
 
 @Component({
   selector: 'app-order-history',
@@ -15,30 +9,50 @@ interface Order {
 export class OrderHistoryComponent implements OnInit {
   @Input() username?: string;
   orders: Order[] = [];
-
-  constructor() {}
+  isLoading = false;
+  errorMessage = '';
+  
+  private orderService = inject(OrderService);
 
   ngOnInit(): void {
     // Initialize order history for the given username
     if (this.username) {
       this.loadOrderHistory();
     }
+    else {
+      this.errorMessage = 'No username provided to load order history.';
+    }
   }
 
   private loadOrderHistory(): void {
-    // TODO: Implement order history loading logic
-    // You'll need to create an order service and call it here
-    console.log(`Loading order history for ${this.username}`);
+    if (!this.username) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
     
-    // Temporary mock data - replace with actual service call
-    this.orders = [
-      { id: '12345', date: '2025-10-25', status: 'Delivered', total: 25.99 },
-      { id: '12344', date: '2025-10-20', status: 'Shipped', total: 15.50 }
-    ];
+    this.orderService.getUserOrders(this.username).subscribe({
+      next: (orders) => {
+        this.orders = orders;
+        this.isLoading = false;
+        console.log(`Loaded ${orders.length} orders for ${this.username}`);
+      },
+      error: (error) => {
+        console.error('Error loading order history:', error);
+        this.errorMessage = 'Failed to load order history. Please try again later.';
+        this.isLoading = false;
+      }
+    });
   }
 
   hasOrders(): boolean {
     return this.orders && this.orders.length > 0;
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
   }
 
 }

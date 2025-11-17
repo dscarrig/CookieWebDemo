@@ -20,11 +20,6 @@ export class CreateaccountComponent implements OnInit {
   invalidLogin = false;
   userExists = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     if (this.route.snapshot.params.id === 'fail') {
       this.userExists = true;

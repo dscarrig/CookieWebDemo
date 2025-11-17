@@ -9,11 +9,6 @@ import { AccountDetailItem } from '../my-account/my-account.component';
 export class UserInfoService {
   private http = inject(HttpClient);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   addUserInfo(username: string, userInfo: string): any {
     console.log(`Adding info: ${userInfo}`);
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/account-details/add`, userInfo);

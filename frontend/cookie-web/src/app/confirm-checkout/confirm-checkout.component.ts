@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AccountDetailItem } from '../my-account/my-account.component';
 import { ShopItem } from '../shop-item/shop-item.component';
 import { CartService } from '../service/cart.service';
+import { OrderService, Order, OrderItem } from '../service/order.service';
 
 @Component({
   selector: 'app-confirm-checkout',
@@ -16,16 +17,13 @@ export class ConfirmCheckoutComponent implements OnInit {
   private basicAuthenticationService = inject(BasicAuthenticationService);
   private router = inject(Router);
   private cartService = inject(CartService);
+  private orderService = inject(OrderService);
 
 
   username!: string;
   accountDetailItem!: AccountDetailItem;
   shopItems!: ShopItem[];
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
+  isSubmittingOrder = false;
 
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';
@@ -73,7 +71,57 @@ export class ConfirmCheckoutComponent implements OnInit {
   }
 
   orderComplete(): void {
-    this.router.navigate(['order-complete']);
+    // Prevent multiple submissions
+    if (this.isSubmittingOrder) {
+      return;
+    }
+
+    this.isSubmittingOrder = true;
+
+    // Group items by ID and count quantities
+    const itemMap = new Map<number, { item: ShopItem, quantity: number }>();
+    
+    this.shopItems.forEach(item => {
+      if (itemMap.has(item.id)) {
+        const existing = itemMap.get(item.id)!;
+        existing.quantity++;
+      } else {
+        itemMap.set(item.id, { item: item, quantity: 1 });
+      }
+    });
+
+    // Create order items with proper quantities
+    const orderItems: OrderItem[] = Array.from(itemMap.values()).map(({ item, quantity }) => ({
+      itemId: item.id,
+      itemName: item.itemName,
+      quantity: quantity,
+      itemPrice: item.price
+    }));
+
+    // Create the order object
+    const order: Order = {
+      id: 0, // Will be set by backend
+      username: this.username,
+      date: new Date().toISOString(),
+      status: 'PENDING',
+      total: this.getCartTotal(),
+      items: orderItems
+    };
+
+    // Send order to backend
+    this.orderService.createOrder(order).subscribe({
+      next: (createdOrder) => {
+        console.log('Order created successfully:', createdOrder);
+        this.isSubmittingOrder = false;
+        this.router.navigate(['order-complete']);
+      },
+      error: (error) => {
+        console.error('Error creating order:', error);
+        this.isSubmittingOrder = false;
+        // You might want to show an error message to the user here
+        alert('Failed to create order. Please try again.');
+      }
+    });
   }
 
   backToCart(): void {

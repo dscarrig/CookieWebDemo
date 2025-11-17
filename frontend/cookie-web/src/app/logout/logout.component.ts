@@ -11,11 +11,6 @@ export class LogoutComponent implements OnInit {
   private basicAuthenticationService = inject(BasicAuthenticationService);
   private appComponent = inject(AppComponent);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.basicAuthenticationService.logout();
   }

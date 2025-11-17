@@ -8,11 +8,6 @@ import { BasicAuthenticationService } from '../basic-authentication.service';
 export class HttpIntercepterBasicAuthService implements HttpInterceptor {
   private basicAuthenticationService = inject(BasicAuthenticationService);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   intercept(request: HttpRequest<any>, next: HttpHandler) {
 
     const basicAuthHeaderString = this.basicAuthenticationService.getAuthenticatedToken();

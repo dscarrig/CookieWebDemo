@@ -19,12 +19,6 @@ export class WelcomeComponent implements OnInit {
   name = '';
   welcomeMessageFromService: string;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  // ActivatedRoute
-  constructor() {}
-
   ngOnInit(): void {
     console.log(this.message);
     this.name = this.basicAuthenticationService.getAuthenticatedUser();

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,16 +6,8 @@ import { Router } from '@angular/router';
   templateUrl: './success.component.html',
   styleUrls: ['./success.component.css']
 })
-export class SuccessComponent implements OnInit {
+export class SuccessComponent {
   private router = inject(Router);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
-  ngOnInit(): void {
-  }
 
   goToLogin() {
     this.router.navigate(['login']);

@@ -26,11 +26,6 @@ export class EnterUserInfoComponent implements OnInit {
   zipCode = '';
   creditCardNumber = '';
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');

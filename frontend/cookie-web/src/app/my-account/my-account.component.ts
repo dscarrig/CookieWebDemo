@@ -33,11 +33,6 @@ export class MyAccountComponent implements OnInit {
   defaultAccountDetailItem: AccountDetailItem;
   allAccountDetailItems: AccountDetailItem[];
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
     this.refreshAccountInfo();
@@ -80,7 +75,7 @@ export class MyAccountComponent implements OnInit {
 
   }
 
-  deleteCardNum(toDelete) {
+  deleteCardNum() {
 
     let combinedInfo;
 
@@ -92,17 +87,16 @@ export class MyAccountComponent implements OnInit {
     }
 
     this.userInfoService.addUserInfo(this.username, combinedInfo).subscribe(
-      response => {
-        console.log(response);
+      () => {
         this.ngOnInit();
       }
     );
 
   }
 
-  setAsDefault(newDefault) {
+  setAsDefault(newDefault: string) {
     this.userInfoService.setDefaultDetail(this.username, newDefault).subscribe(
-      response => {
+      () => {
         this.ngOnInit();
       }
     );

@@ -15,16 +15,11 @@ export class CreateUserService {
 
   userExists = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   createUser(username: string, password: string): void {
 
     this.basicAuthenticationService.executeJWTAuthenticationService('temp', 'temp')
       .subscribe(
-        (_response: any) => {
+        () => {
 
         this.http.get<boolean>(`${API_URL}/users/exists/${username}`).subscribe(
           userExistsData => {

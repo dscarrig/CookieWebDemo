@@ -9,12 +9,6 @@ import { ShopItem } from '../shop-item/shop-item.component';
 export class CartService {
   private http = inject(HttpClient);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
-
   addToCart(username: string, id: number): any {
     return this.http.post(`${TODO_JPA_API_URL}/users/${username}/cart/add`, id);
   }

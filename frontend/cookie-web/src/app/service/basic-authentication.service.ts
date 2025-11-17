@@ -12,11 +12,6 @@ export const AUTHENTICATED_USER = 'authenticaterUser';
 export class BasicAuthenticationService {
   private http = inject(HttpClient);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   executeJWTAuthenticationService(username: string, password: string): any {
 
     return this.http.post<any>(

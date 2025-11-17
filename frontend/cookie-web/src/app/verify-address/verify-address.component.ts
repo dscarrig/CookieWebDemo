@@ -17,11 +17,6 @@ export class VerifyAddressComponent implements OnInit {
   username: string;
   accountDetailItem: AccountDetailItem;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser();
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');

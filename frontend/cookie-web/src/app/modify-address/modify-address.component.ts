@@ -23,11 +23,6 @@ export class ModifyAddressComponent implements OnInit {
   state = '';
   zipCode = '';
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
 

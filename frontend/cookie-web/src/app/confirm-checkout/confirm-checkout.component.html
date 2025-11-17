@@ -45,7 +45,10 @@
 
 <div>
   <br />
-  <button (click)="orderComplete()" class="btn-success">Pay Now</button>
+  <button (click)="orderComplete()" class="btn-success" [disabled]="isSubmittingOrder">
+    <span *ngIf="!isSubmittingOrder">Pay Now</span>
+    <span *ngIf="isSubmittingOrder">Processing Order...</span>
+  </button>
 </div>
 
 <div>

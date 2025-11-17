@@ -1,5 +1,5 @@
 import { BasicAuthenticationService } from './../service/basic-authentication.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../service/cart.service';
 import { AppComponent } from '../app.component';
@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   private router = inject(Router);
   private basicAuthenticationService = inject(BasicAuthenticationService);
   private cartService = inject(CartService);
@@ -20,14 +20,6 @@ export class LoginComponent implements OnInit {
   password = '';
   errorMessage = 'Invalid Creds';
   invalidLogin = false;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
-  ngOnInit(): void {
-  }
 
   handleJWTAuthLogin() {
     console.log(this.username);
