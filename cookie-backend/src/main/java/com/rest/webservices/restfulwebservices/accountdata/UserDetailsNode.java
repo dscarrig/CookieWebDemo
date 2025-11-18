@@ -24,6 +24,7 @@ public class UserDetailsNode
 	private String state;
 	private String zipCode;
 	private String cardNum;
+	private boolean isDefault;
 
 	protected UserDetailsNode()
 	{
@@ -31,7 +32,7 @@ public class UserDetailsNode
 	}
 
 	public UserDetailsNode(Long id, String username, String fullName, String address, String addressTwo, String city, String state,
-			String zipCode, String cardNum)
+			String zipCode, String cardNum, boolean isDefault)
 	{
 		super();
 		this.id = id;
@@ -43,6 +44,7 @@ public class UserDetailsNode
 		this.state = state;
 		this.zipCode = zipCode;
 		this.cardNum = cardNum;
+		this.isDefault = isDefault;
 
 	}
 
@@ -134,6 +136,16 @@ public class UserDetailsNode
 	public void setCardNum(String cardNum)
 	{
 		this.cardNum = cardNum;
+	}
+
+	public boolean getIsDefault()
+	{
+		return isDefault;
+	}
+
+	public void setIsDefault(boolean isDefault)
+	{
+		this.isDefault = isDefault;
 	}
 
 }

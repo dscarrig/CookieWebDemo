@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserInfoService } from '../service/user-info.service';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { AccountDetailItem } from '../my-account/my-account.component';
+import { AddressFormData } from '../shared/address-form/address-form.component';
 
 @Component({
   selector: 'app-enter-user-info',
@@ -14,34 +15,29 @@ export class EnterUserInfoComponent implements OnInit {
   private userInfoService = inject(UserInfoService);
   private basicAuthenticationService = inject(BasicAuthenticationService);
 
-
   accountDetailItem!: AccountDetailItem;
   username!: string;
-
-  fullName = '';
-  addressOne = '';
-  addressTwo = '';
-  city = '';
-  state = '';
-  zipCode = '';
+  initialAddressData?: AddressFormData;
   creditCardNumber = '';
 
   ngOnInit(): void {
     this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '', false);
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
       (response: AccountDetailItem) => {
         this.accountDetailItem = response;
-        this.fullName = this.accountDetailItem.fullName;
-        this.addressOne = this.accountDetailItem.address;
-        this.addressTwo = this.accountDetailItem.addressTwo;
-        this.city = this.accountDetailItem.city;
-        this.state = this.accountDetailItem.state;
-        this.zipCode = this.accountDetailItem.zipCode;
+        this.initialAddressData = {
+          fullName: response.fullName,
+          addressOne: response.address,
+          addressTwo: response.addressTwo,
+          city: response.city,
+          state: response.state,
+          zipCode: response.zipCode
+        };
 
-        if (this.accountDetailItem.cardNum !== '-1') {
-          this.creditCardNumber = this.accountDetailItem.cardNum;
+        if (response.cardNum !== '-1') {
+          this.creditCardNumber = response.cardNum;
         } else {
           this.creditCardNumber = '';
         }
@@ -49,10 +45,14 @@ export class EnterUserInfoComponent implements OnInit {
     );
   }
 
-  proceedToCheckout(): void {
+  onCheckout(addressData: AddressFormData): void {
+    if (!this.cardNumCorrectFormat()) {
+      return;
+    }
+
     const username = this.basicAuthenticationService.getAuthenticatedUser();
-    const combinedInfo = this.fullName + '_' + this.addressOne + '_' + this.addressTwo + '_' +
-                        this.city + '_' + this.state + '_' + this.zipCode + '_' + this.creditCardNumber;
+    const combinedInfo = addressData.fullName + '_' + addressData.addressOne + '_' + addressData.addressTwo + '_' +
+                        addressData.city + '_' + addressData.state + '_' + addressData.zipCode + '_' + this.creditCardNumber;
 
     if (username) {
       this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
@@ -68,59 +68,14 @@ export class EnterUserInfoComponent implements OnInit {
     this.router.navigate(['cart']);
   }
 
-  allInputEntered(): boolean {
-    if (this.fullName === '' || this.addressOne === '' || this.city === ''
-      || this.state === '' || this.zipCode === '' || this.creditCardNumber === '') {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  allCorrectFormat(): boolean {
-    return this.zipCorrectFormat() && this.cardNumCorrectFormat() && this.stateCorrectFormat();
-  }
-
-  stateCorrectFormat(): boolean {
-    let correct = true;
-
-    if (this.state.length !== 2) {
-      correct = false;
-    }
-
-    if (this.state.match(/\d+/g) !== null) {
-      correct = false;
-    }
-
-    return correct;
-  }
-
-  zipCorrectFormat(): boolean {
-    let correct = true;
-
-    if (this.zipCode.length !== 5) {
-      correct = false;
-    }
-
-    if (this.zipCode.match(/^[0-9]+$/) === null) {
-      correct = false;
-    }
-
-    return correct;
+  isCheckoutValid(): boolean {
+    return this.creditCardNumber !== '' && this.cardNumCorrectFormat();
   }
 
   cardNumCorrectFormat(): boolean {
-    let correct = true;
-
     if (this.creditCardNumber.length !== 16) {
-      correct = false;
+      return false;
     }
-
-    if (this.creditCardNumber.match(/^[0-9]+$/) === null) {
-      correct = false;
-    }
-
-    return correct;
+    return this.creditCardNumber.match(/^[0-9]+$/) !== null;
   }
-
 }

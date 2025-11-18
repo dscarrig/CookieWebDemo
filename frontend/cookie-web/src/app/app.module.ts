@@ -29,6 +29,7 @@ import { ConfirmCheckoutComponent } from './confirm-checkout/confirm-checkout.co
 import { OrderCompleteComponent } from './order-complete/order-complete.component';
 import { ModifyCardNumComponent } from './modify-card-num/modify-card-num.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { AddressFormComponent } from './shared/address-form/address-form.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -54,7 +55,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
         ConfirmCheckoutComponent,
         OrderCompleteComponent,
         ModifyCardNumComponent,
-        OrderHistoryComponent
+        OrderHistoryComponent,
+        AddressFormComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { UserInfoService } from '../service/user-info.service';
 import { AccountDetailItem } from '../my-account/my-account.component';
+import { AddressFormData } from '../shared/address-form/address-form.component';
 
 @Component({
   selector: 'app-modify-address',
@@ -16,26 +17,29 @@ export class ModifyAddressComponent implements OnInit {
 
   accountDetailItem!: AccountDetailItem;
   username = '';
-  fullName = '';
-  addressOne = '';
-  addressTwo = '';
-  city = '';
-  state = '';
-  zipCode = '';
+  initialAddressData?: AddressFormData;
 
   ngOnInit(): void {
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '', false);
 
     this.username = this.basicAuthenticationService.getAuthenticatedUser() || '';
 
     this.userInfoService.getUserAccountDetails(this.username).subscribe(
       (response: AccountDetailItem) => {
         this.accountDetailItem = response;
+        this.initialAddressData = {
+          fullName: response.fullName,
+          addressOne: response.address,
+          addressTwo: response.addressTwo,
+          city: response.city,
+          state: response.state,
+          zipCode: response.zipCode
+        };
       }
     );
   }
 
-  saveNewAddress(): void {
+  onAddressSave(addressData: AddressFormData): void {
     const username = this.basicAuthenticationService.getAuthenticatedUser();
     if (!username) {
       return;
@@ -44,11 +48,11 @@ export class ModifyAddressComponent implements OnInit {
     let combinedInfo;
 
     if (this.accountDetailItem.cardNum === '' || this.accountDetailItem.cardNum === '-1') {
-      combinedInfo = this.fullName + '_' + this.addressOne + '_' + this.addressTwo + '_' +
-                    this.city + '_' + this.state + '_' + this.zipCode + '_-1';
+      combinedInfo = addressData.fullName + '_' + addressData.addressOne + '_' + addressData.addressTwo + '_' +
+                    addressData.city + '_' + addressData.state + '_' + addressData.zipCode + '_-1';
     } else {
-      combinedInfo = this.fullName + '_' + this.addressOne + '_' + this.addressTwo + '_' +
-                    this.city + '_' + this.state + '_' + this.zipCode + '_' + this.accountDetailItem.cardNum;
+      combinedInfo = addressData.fullName + '_' + addressData.addressOne + '_' + addressData.addressTwo + '_' +
+                    addressData.city + '_' + addressData.state + '_' + addressData.zipCode + '_' + this.accountDetailItem.cardNum;
     }
 
     this.userInfoService.addUserInfo(username, combinedInfo).subscribe(
@@ -59,49 +63,7 @@ export class ModifyAddressComponent implements OnInit {
     );
   }
 
-  allInputEntered(): boolean {
-    if (this.fullName === '' || this.addressOne === '' || this.city === ''
-      || this.state === '' || this.zipCode === '') {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  allCorrectFormat(): boolean {
-    return this.zipCorrectFormat() && this.stateCorrectFormat();
-  }
-
-  stateCorrectFormat(): boolean {
-    let correct = true;
-
-    if (this.state.length !== 2) {
-      correct = false;
-    }
-
-    if (this.state.match(/\d+/g) !== null) {
-      correct = false;
-    }
-
-    return correct;
-  }
-
-  zipCorrectFormat(): boolean {
-    let correct = true;
-
-    if (this.zipCode.length < 5) {
-      correct = false;
-    }
-
-    if (this.zipCode.match(/^[0-9]+$/) === null) {
-      correct = false;
-    }
-
-    return correct;
-  }
-
-  backToUserInfo(): void {
+  onCancel(): void {
     this.router.navigate(['my-account']);
   }
-
 }

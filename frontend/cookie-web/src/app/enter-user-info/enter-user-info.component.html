@@ -1,41 +1,22 @@
 <h1>Please enter your address and payment information.</h1>
 
-<head>
-  <style>
-    input {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
-</head>
-
-
 <div class="container">
+  <app-address-form
+    [initialData]="initialAddressData"
+    submitButtonText="Check Out"
+    cancelButtonText="Back to Cart"
+    [showCancelButton]="true"
+    (formSubmit)="onCheckout($event)"
+    (formCancel)="backToCart()">
+  </app-address-form>
 
-  <div>
-    Full Name : <input type="text" value={{accountDetailItem.fullName}} [(ngModel)]="fullName">
+  <div style="text-align: center; margin-top: 20px;">
+    <label>Credit Card Number : </label>
+    <input type="text" digitOnly [(ngModel)]="creditCardNumber" style="display: inline-block; width: auto;">
     <br />
-    Address Line 1 : <input type="text" value={{accountDetailItem.address}} [(ngModel)]="addressOne">
-    <br />
-    Address Line 2 : <input type="text" value={{accountDetailItem.addressTwo}} [(ngModel)]="addressTwo">
-    <br />
-    City : <input type="text" value={{accountDetailItem.city}} [(ngModel)]="city">
-    <br />
-    State : <input type="text" value={{accountDetailItem.state}} [(ngModel)]="state">
-    <br />
-    Zip Code : <input type="text" value={{accountDetailItem.zipCode}} [(ngModel)]="zipCode">
-    <br />
-    Credit Card Number : <input type="text" digitOnly [(ngModel)]="creditCardNumber">
-    <br />
-    <br />
-
-    <button *ngIf="allInputEntered() && allCorrectFormat()" (click)=proceedToCheckout() class="btn btn-success">Check Out</button>
-    <div class="alert alert-warning" *ngIf="!allInputEntered() || !allCorrectFormat()">Please fill out address and payment information.</div>
-    <br />
-    <br />
-    <button (click)=backToCart() class="btn btn-success">Back to Cart</button>
-
+    <div class="alert alert-warning" *ngIf="!isCheckoutValid()" style="margin-top: 10px;">
+      Please enter a valid 16-digit credit card number.
+    </div>
   </div>
 </div>
 

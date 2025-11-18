@@ -13,7 +13,8 @@ export class AccountDetailItem {
     public city: string,
     public state: string,
     public zipCode: string,
-    public cardNum: string
+    public cardNum: string,
+    public isDefault: boolean
 
   ) { }
 }
@@ -34,7 +35,7 @@ export class MyAccountComponent implements OnInit {
   allAccountDetailItems: AccountDetailItem[];
 
   ngOnInit(): void {
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '', false);
     this.refreshAccountInfo();
   }
 
@@ -124,13 +125,6 @@ export class MyAccountComponent implements OnInit {
   }
 
   isDefaultAccountDetailItem(compare) {
-    console.log(`Default address is ${this.defaultAccountDetailItem.address}`);
-    console.log(`Compare address is ${compare.address}`);
-    if (compare.address === this.defaultAccountDetailItem.address) {
-      return 1;
-    }
-    else {
-      return 0;
-    }
+    return compare.isDefault ? 1 : 0;
   }
 }

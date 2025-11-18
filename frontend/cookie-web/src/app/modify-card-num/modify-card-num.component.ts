@@ -20,7 +20,7 @@ export class ModifyCardNumComponent implements OnInit {
   cardNum = '';
 
   ngOnInit(): void {
-    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '');
+    this.accountDetailItem = new AccountDetailItem(0, '', '', '', '', '', '', '', '', false);
 
     this.username = this.basicAuthenticationService.getAuthenticatedUser();
 
