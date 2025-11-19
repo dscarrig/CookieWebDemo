@@ -48,6 +48,4 @@ export class VerifyAddressComponent implements OnInit {
     this.router.navigate(['confirm-checkout']);
   }
 
-
-
 }

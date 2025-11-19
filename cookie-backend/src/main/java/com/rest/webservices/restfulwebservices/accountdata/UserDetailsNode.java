@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import com.rest.webservices.restfulwebservices.security.CreditCardEncryptor;
 
 @Entity
 @Table(name = "user_details_node")
@@ -23,7 +25,11 @@ public class UserDetailsNode
 	private String city;
 	private String state;
 	private String zipCode;
+	
+	@Convert(converter = CreditCardEncryptor.class)
+	@Column(length = 500) // Encrypted data is longer than plain text
 	private String cardNum;
+	
 	private boolean isDefault;
 
 	protected UserDetailsNode()
